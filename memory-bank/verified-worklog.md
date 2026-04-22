@@ -6,3 +6,4 @@
 | 2026-04-22 | MB-002 | Initialize boilerplate for core documentation | Manual inspection |
 | 2026-04-22 | MB-003 | Create .gitignore file | Manual inspection |
 | 2026-04-22 | OPS-001 | Create GitHub Actions Release workflow | Manual inspection |
+| 2026-04-22 | OPS-002 | Fix recursive copy in release workflow | Verified via push |

@@ -18,3 +18,11 @@ GNN-ANTIGRAVITY is a lightweight, performance-oriented WordPress theme. It follo
     - `wp_head()` and `wp_footer()` mandatory in all wrappers.
     - Custom "Full Width" and "Blank Canvas" template support.
     - Theme-specific Elementor widget registration (optional).
+
+## Core Principles
+1. **Zero 3rd-party Dependency:** The theme must not rely on external plugins (ACF, Redux, Frameworks, etc.) for core functionality. Use native WordPress APIs (Customizer, Metadata, etc.).
+2. **Native Customizer Support:** 100% integration with `wp-admin/customize.php`.
+    - **Site Identity:** Logo, Title, Tagline, Favicon.
+    - **Visuals:** Colors, Typography (Native font loading), Backgrounds.
+    - **Layout:** Header styles, Footer settings, Sidebar controls.
+    - **Special Features:** Native Slide/Carousel management via Customizer.

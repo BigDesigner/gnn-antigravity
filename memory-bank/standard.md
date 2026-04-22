@@ -29,3 +29,9 @@
 - **Proactive Suggestions:** Agents must always evaluate if a better, more modern, or more user-friendly way exists to fulfill a request.
 - **Decision Support:** If a better way is found, it must be presented to the USER as a suggestion before implementation.
 - **Educational Context:** Suggestions should include a brief explanation of "why" it is better, serving as a learning resource for WordPress theme development.
+## 8. Native WordPress Development
+- **No Dependencies:** Avoid 3rd party plugins for core theme features.
+- **Customizer API:** Use the `WP_Customize_Manager` class for all theme options.
+- **Selective Refresh:** Implement `customize-selective-refresh-widgets` for better UX.
+- **Sanitization:** Every Customizer setting MUST have a corresponding `sanitize_callback`.
+- **Favicon & Logo:** Use `add_theme_support( 'custom-logo' )` and core Site Icon functionality.

@@ -13,3 +13,6 @@
 - [ ] ELM-003: Optimize theme CSS for Elementor reset compatibility.
 - [ ] UI-001: Design responsive navigation.
 - [ ] SEO-001: Implement meta tag management.
+- [ ] CUST-001: Implement Native Customizer API (Header, Footer, Typography).
+- [ ] CUST-002: Add Native Slider/Carousel controls via Customizer.
+- [ ] CUST-003: Integrate Selective Refresh for real-time Customizer updates.

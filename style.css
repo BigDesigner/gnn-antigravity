@@ -1,0 +1,61 @@
+/*
+Theme Name: GNN-antigravity
+Theme URI: https://gnn.tr
+Author: GNNcreative
+Author URI: https://gnn.tr
+Description: A highly minimalist, experimental "Canvas" theme mirroring the actual antigravity.google.
+Version: 1.1.0
+License: GNU General Public License v2 or later
+Text Domain: gnn-antigravity
+*/
+
+:root {
+    --bg: #000000;
+    --fg: #ffffff;
+    --gray: #808080;
+    --accent: #00f2ff;
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    --tracking: 0.15em;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+a:hover {
+    opacity: 0.5;
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(5px, -10px) rotate(1deg);
+    }
+
+    66% {
+        transform: translate(-5px, 5px) rotate(-1deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+.drift {
+    animation: drift 8s ease-in-out infinite;
+}

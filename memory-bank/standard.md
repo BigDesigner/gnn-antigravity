@@ -35,3 +35,8 @@
 - **Selective Refresh:** Implement `customize-selective-refresh-widgets` for better UX.
 - **Sanitization:** Every Customizer setting MUST have a corresponding `sanitize_callback`.
 - **Favicon & Logo:** Use `add_theme_support( 'custom-logo' )` and core Site Icon functionality.
+
+## 9. Development Integrity & Verification
+- **Pre-Commit Check:** No code shall be committed without a "PASS" status from the verification step.
+- **Verification Methods:** PHP lint (`php -l`), CSS validation, and functional verification.
+- **Atomic Commits:** Each commit must represent a single, verified, and complete change or fix.

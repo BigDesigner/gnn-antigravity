@@ -14,6 +14,9 @@
     - If the USER accepts the advice, implement the improved version.
     - If the USER declines, implement the original request as specified, but keep the advice documented in `decisions.md` if relevant.
 - **Educational Support:** Provide context and "why" for suggestions to help the USER learn WordPress development best practices.
+- **Verification-Gate for Commits:** Agents MUST run a pass/fail verification (e.g., `php -l`, automated tests, or manual check with logs) after every change.
+- **No Pass, No Commit:** If the verification fails, the agent MUST fix the issue before staging or committing. Commits are only allowed on a "Pass" status.
+- **Clean Worktree:** Ensure the worktree is clean and only contains verified, intended changes before pushing.
 - **Verification:** Always check the Memory Bank before starting a task.
 - **Traceability:** Document every significant step in the worklog, including sources consulted.
 - **Proactive Inquiry:** Stop and ask if requirements are ambiguous.

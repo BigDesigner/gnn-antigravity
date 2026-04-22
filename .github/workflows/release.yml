@@ -38,23 +38,21 @@ jobs:
           # Create a temporary directory for clean build
           mkdir build
           
-          # Copy only necessary files to build directory
-          # Using rsync-like behavior with cp or find to avoid including hidden git files
-          cp -r ./* build/
-          
-          # Remove files we don't want in the zip
-          rm -rf build/.git
-          rm -rf build/.github
-          rm -rf build/memory-bank
-          rm -rf build/specs
-          rm -rf build/agents
-          rm -rf build/tasks
-          rm -rf build/docs
-          rm -rf build/.gitignore
-          rm -rf build/implementation_plan.md
-          rm -rf build/task.md
-          rm -rf build/walkthrough.md
-          rm -rf build/build # avoid recursive build folder
+          # Use rsync to copy files, excluding the build directory itself and other dev files
+          # This is more robust than 'cp' for recursive situations
+          rsync -av --exclude='build' \
+                    --exclude='.git' \
+                    --exclude='.github' \
+                    --exclude='memory-bank' \
+                    --exclude='specs' \
+                    --exclude='agents' \
+                    --exclude='tasks' \
+                    --exclude='docs' \
+                    --exclude='.gitignore' \
+                    --exclude='implementation_plan.md' \
+                    --exclude='task.md' \
+                    --exclude='walkthrough.md' \
+                    ./ build/
           
           # Zip the build directory
           cd build && zip -r "../$ZIP_NAME" . && cd ..

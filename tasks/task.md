@@ -16,3 +16,6 @@
 - [ ] CUST-001: Implement Native Customizer API (Header, Footer, Typography).
 - [ ] CUST-002: Add Native Slider/Carousel controls via Customizer.
 - [ ] CUST-003: Integrate Selective Refresh for real-time Customizer updates.
+- [ ] SEC-001: Implement Cloudflare Turnstile integration for login/forms.
+- [ ] SEC-002: Implement Google reCAPTCHA v3 fallback integration.
+- [ ] ANA-001: Implement Google Analytics (GA4) integration via Customizer.

@@ -3,6 +3,10 @@
  * GNN Meta Box Controls
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 function gnn_add_metadata_metabox()
 {
     $screens = array('post', 'page');

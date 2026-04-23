@@ -5,6 +5,10 @@
  * @package GNN-antigravity
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 if (!function_exists('gnn_antigravity_setup')):
     /**
      * Sets up theme defaults and registers support for various WordPress features.

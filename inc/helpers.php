@@ -3,6 +3,10 @@
  * GNN Helper Functions
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 if (!function_exists('gnn_get_youtube_id')) {
     /**
      * Extracts the YouTube video ID from a URL.

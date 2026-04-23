@@ -12,6 +12,10 @@
  * @since   1.2.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 get_header();
 ?>
 

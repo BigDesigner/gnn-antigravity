@@ -14,3 +14,4 @@
 | 2026-04-23 | SEO-001 | Native SEO module: meta, OG, Twitter, Schema, metabox (`inc/seo.php`) | Code review |
 | 2026-04-23 | CUST-001 | Customizer rewrite: Typography, Header, Footer, SEO panels | Code review |
 | 2026-04-23 | CUST-003 | Selective Refresh partials + `customizer-preview.js` | Code review |
+| 2026-04-23 | AUDIT-01 | Sprint 1 & 2 Security & Architecture Audit (Added ABSPATH checks) | Automated Static Review |

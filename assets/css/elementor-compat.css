@@ -1,0 +1,106 @@
+/**
+ * GNN Elementor Compatibility Stylesheet
+ *
+ * Provides CSS overrides that ensure Elementor content renders
+ * correctly within the GNN-antigravity theme framework.
+ * This stylesheet is loaded conditionally only when Elementor is active.
+ *
+ * @package GNN-antigravity
+ * @since   1.2.0
+ */
+
+/* ==========================================================================
+   1. Full-Width Template Resets
+   ========================================================================== */
+
+.elementor-full-width-wrapper {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ==========================================================================
+   2. Canvas Template Resets
+   ========================================================================== */
+
+.gnn-elementor-canvas {
+    background: var(--bg, #000);
+    color: var(--fg, #fff);
+}
+
+.gnn-elementor-canvas #elementor-canvas-content {
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   3. Elementor Section Overrides
+   ========================================================================== */
+
+/* Ensure stretched sections work with our theme's body setup */
+.elementor-page .elementor-section.elementor-section-stretched {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+}
+
+/* Gap inheritance — prevent theme global gaps from bleeding in */
+.elementor-page .elementor-element {
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   4. Typography Inheritance
+   ========================================================================== */
+
+/* Elementor elements should inherit theme typography by default */
+.elementor-page .elementor-widget-text-editor,
+.elementor-page .elementor-widget-heading .elementor-heading-title {
+    font-family: inherit;
+}
+
+/* Preserve the Inter font from theme for unstyled Elementor text */
+.elementor-page .elementor-text-editor {
+    font-family: var(--font-main, 'Inter', sans-serif);
+    line-height: 1.65;
+}
+
+/* ==========================================================================
+   5. Dark Theme Compatibility
+   ========================================================================== */
+
+/* Force dark backgrounds in Elementor editing context */
+.elementor-editor-active .elementor-element {
+    color: var(--fg, #fff);
+}
+
+/* Elementor navigator & preview should respect dark theme */
+.elementor-page .elementor-column-gap-default > .elementor-column > .elementor-element-populated {
+    padding: 10px;
+}
+
+/* ==========================================================================
+   6. Button Overrides (match theme accent)
+   ========================================================================== */
+
+.elementor-page .elementor-button {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.elementor-page .elementor-button:hover {
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   7. Responsive Adjustments
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+    .elementor-full-width-wrapper {
+        padding: 0;
+    }
+
+    .elementor-page .elementor-section.elementor-section-stretched {
+        margin-left: calc(-50vw + 50%) !important;
+    }
+}

@@ -147,6 +147,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // --- 3e. BACK TO TOP ---
+    const initBackToTop = () => {
+        const btn = document.getElementById('gnn-back-to-top');
+        if (!btn) return;
+
+        // Prevent multiple attachments
+        if (btn.getAttribute('data-gnn-init')) return;
+        btn.setAttribute('data-gnn-init', 'true');
+
+        // Show/hide based on scroll position
+        const toggleVisibility = () => {
+            const scrollY = window.scrollY || document.documentElement.scrollTop;
+            if (scrollY > 400) {
+                btn.classList.add('is-visible');
+            } else {
+                btn.classList.remove('is-visible');
+            }
+        };
+
+        window.addEventListener('scroll', toggleVisibility, { passive: true });
+        toggleVisibility(); // Check initial state
+
+        // Scroll to top on click (use Lenis if available)
+        btn.addEventListener('click', () => {
+            if (typeof lenis !== 'undefined' && lenis.scrollTo) {
+                lenis.scrollTo(0, { duration: 1.2 });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    };
+
     // Initial Start
     initInteractionEngine();
+    initBackToTop();
 });

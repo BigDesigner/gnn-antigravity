@@ -1,10 +1,11 @@
 # Next Atomic Actions
 
-## Immediate Steps
-1. [ ] Implement `add_theme_support( 'elementor-full-width' )` in `functions.php`.
-2. [ ] Create `template-elementor.php` for full-width content.
-3. [ ] Verify `the_content()` implementation in `page.php`.
-4. [ ] Review `functions.php` to map existing hooks.
-5. [ ] Audit `inc/` directory contents.
-6. [ ] Initialize `inc/customizer.php` for native WordPress settings.
-7. [ ] Add `add_theme_support( 'custom-logo' )` and header/footer dynamic controls.
+## Next Steps
+1. [ ] **UI-001**: Design responsive navigation system (dropdown improvements, scroll behavior).
+2. [ ] **CUST-002**: Add Native Slider/Carousel controls via Customizer.
+3. [ ] **SEC-001**: Implement Cloudflare Turnstile integration for login/forms.
+4. [ ] **SEC-002**: Implement Google reCAPTCHA v3 fallback integration.
+5. [ ] **ANA-001**: Implement Google Analytics (GA4) integration via Customizer.
+6. [ ] Test Elementor templates on a live WordPress installation.
+7. [ ] Test SEO meta output (meta descriptions, OG tags, Schema JSON-LD).
+8. [ ] Test Customizer live preview (Selective Refresh + postMessage).

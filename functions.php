@@ -49,7 +49,6 @@ if (!function_exists('gnn_antigravity_setup')):
         // Remove Core Block Patterns
         remove_theme_support('core-block-patterns');
 
-        add_theme_support('title-tag');
         add_theme_support('custom-logo', array(
             'height' => 100,
             'width' => 400,
@@ -80,6 +79,8 @@ require get_template_directory() . '/inc/helpers.php';
 require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/metaboxes.php';
+require get_template_directory() . '/inc/elementor-compat.php';
+require get_template_directory() . '/inc/seo.php';
 
 /**
  * Custom Block registration logic can stay here or move to inc/blocks.php if it grows.

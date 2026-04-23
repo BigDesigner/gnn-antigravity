@@ -14,6 +14,7 @@
 - [x] CUST-003: Integrate Selective Refresh for real-time Customizer updates.
 
 ## Active Sprint
+- [ ] CUST-004: Implement `theme.json` Design System (Gutenberg & Site Editor sync).
 - [ ] UI-001: Design responsive navigation.
 - [ ] CUST-002: Add Native Slider/Carousel controls via Customizer.
 - [ ] SEC-001: Implement Cloudflare Turnstile integration for login/forms.

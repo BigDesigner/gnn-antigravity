@@ -1,7 +1,8 @@
 # Next Atomic Actions
 
 ## Next Steps
-1. [ ] **UI-001**: Design responsive navigation system (dropdown improvements, scroll behavior).
+1. [ ] **CUST-004**: Create `theme.json` to define global styles, color palette, and Gutenberg sync.
+2. [ ] **UI-001**: Design responsive navigation system (dropdown improvements, scroll behavior).
 2. [ ] **CUST-002**: Add Native Slider/Carousel controls via Customizer.
 3. [ ] **SEC-001**: Implement Cloudflare Turnstile integration for login/forms.
 4. [ ] **SEC-002**: Implement Google reCAPTCHA v3 fallback integration.

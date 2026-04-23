@@ -28,6 +28,7 @@
 | `seo.php` | Meta descriptions, OG, Twitter, Schema, SEO metabox |
 
 ## Planned Integrations
+- `theme.json` Design System (CUST-004)
 - Cloudflare Turnstile (SEC-001)
 - Google reCAPTCHA v3 (SEC-002)
 - Google Analytics GA4 (ANA-001)

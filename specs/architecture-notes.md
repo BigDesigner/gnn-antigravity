@@ -35,6 +35,10 @@ GNN-ANTIGRAVITY is a lightweight, performance-oriented WordPress theme. It follo
     - Dynamic CSS output via CSS custom properties (`--font-main`, `--accent-color`, etc.).
     - Selective Refresh partials for text fields (logo, copyright, hero title/subtitle).
     - postMessage transport for colors, typography, and spacing (via `customizer-preview.js`).
+- **Hybrid Theme & `theme.json`:**
+    - Uses `theme.json` to define a unified Design System for both Site Editor and classic templates.
+    - Synchronizes Customizer-defined colors and typography with Gutenberg block editor tokens.
+    - Enables "Styles" management within `wp-admin/site-editor.php` for Block Templates.
 
 ## External Services Integration
 1. **Security (Bot Protection):**

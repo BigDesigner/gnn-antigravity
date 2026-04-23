@@ -15,6 +15,7 @@
 - Native Customizer (Typography, Header, Footer, Colors, SEO panel)
 - Selective Refresh + postMessage live preview
 - Back-to-top button (optional via Customizer)
+- Standardized `CHANGELOG.md` tracking
 
 ## Module Map (`inc/`)
 | Module | Responsibility |

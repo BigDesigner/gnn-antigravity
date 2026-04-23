@@ -53,3 +53,10 @@
 - All SEO functions must check for active 3rd-party SEO plugins and disable gracefully.
 - Per-post/page SEO overrides must be available via meta boxes.
 - All meta output must be properly escaped with `esc_attr()`.
+
+## 11. Changelog Management
+- **Automatic Updates:** Every version bump in `style.css` MUST be accompanied by a corresponding entry in `CHANGELOG.md`.
+- **Format:** Follow the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) standard.
+- **Content:** Categorize changes into Added, Changed, Fixed, or Security.
+- **Milestones:** If multiple features are developed in one session, break them down into intermediate milestone versions (e.g., 1.1.0 -> 1.2.0, 1.3.0) to maintain a clear development history.
+- **Commit Rule:** The `CHANGELOG.md` update should be part of the version bump commit or a separate `docs: update changelog` commit.

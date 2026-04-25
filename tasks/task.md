@@ -14,12 +14,16 @@
 - [x] CUST-003: Integrate Selective Refresh for real-time Customizer updates.
 
 ## Active Sprint
-- [ ] CUST-004: Implement `theme.json` Design System (Gutenberg & Site Editor sync).
-- [ ] UI-001: Design responsive navigation.
-- [ ] CUST-002: Add Native Slider/Carousel controls via Customizer.
-- [ ] SEC-001: Implement Cloudflare Turnstile integration for login/forms.
-- [ ] SEC-002: Implement Google reCAPTCHA v3 fallback integration.
-- [ ] ANA-001: Implement Google Analytics (GA4) integration via Customizer.
+- [x] CUST-004: Implement `theme.json` Design System (Gutenberg & Site Editor sync).
+- [x] UI-001: Design responsive navigation.
+- [x] CUST-002: Add Native Slider/Carousel controls via Customizer.
+
+
+- [x] SEC-001: Implement Cloudflare Turnstile integration for login/forms.
+- [x] SEC-002: Implement Google reCAPTCHA v3 fallback integration.
+
+
+- [x] ANA-001: Implement Google Analytics (GA4) integration via Customizer.
 
 ## Backlog
 - [ ] PERF-001: Implement asset optimization (minification, critical CSS).

@@ -35,3 +35,17 @@
 - **Context:** Full page reloads in Customizer create poor UX for text/color changes.
 - **Decision:** Text fields use Selective Refresh partials. CSS-based settings (colors, typography, spacing) use `postMessage` transport with `customizer-preview.js` updating CSS custom properties in real-time.
 - **Consequences:** Near-instant preview for all theme settings. Slightly more JS to maintain but dramatically better Customizer UX.
+
+## [ADR-007] Native Hero Slider vs 3rd-Party Plugins
+- **Status:** Accepted
+- **Context:** Need for a homepage carousel without increasing dependency debt or security risks.
+- **Decision:** Built a native implementation using GSAP and Customizer API.
+- **Rationale:** Maintains "Zero 3rd-party dependency" core principle. Reduces bundle size and security surface area. Using GSAP ensures performance and "juicy" animations are on par with premium plugins.
+- **Consequences:** Zero plugin bloat. Full control over markup and accessibility.
+
+## [ADR-008] Scroll-based Header Glassmorphism
+- **Status:** Accepted
+- **Context:** Minimalist design needs visual depth cues when scrolling over content.
+- **Decision:** Implement a state-based header that gains a `.is-scrolled` class via JS.
+- **Rationale:** Enhances visual depth and "premium" feel. Using `backdrop-filter` with fallback ensures modern browsers get the best experience while maintaining readability.
+- **Consequences:** Subtle, modern UI improvement that signals system state to the user.

@@ -13,21 +13,28 @@
         }
 
         .site-top-bar {
-            position:
-                <?php echo esc_attr(get_theme_mod('header_sticky', 'fixed')); ?>
-                !important;
-            width: 100%;
-            left: 0;
-            top: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 2000;
-            background:
-                <?php echo (get_theme_mod('header_bg_type', 'transparent') == 'colored') ? esc_attr(get_theme_mod('header_bg_color', '#000000')) : 'transparent'; ?>
-            ;
-            transition: background 0.3s ease;
-        }
+    position: fixed !important;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2000;
+    padding: 0 2rem;
+    height: var(--header-height, 80px);
+    background: transparent;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.site-top-bar.is-scrolled {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    height: calc(var(--header-height, 80px) * 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 
         .site-bottom-bar {
             position: static !important;
@@ -103,11 +110,60 @@
         $hero_type = get_post_meta($obj_id, '_gnn_hero_type', true) ?: 'default';
         $hero_media = get_post_meta($obj_id, '_gnn_hero_media', true);
         $hero_custom = get_post_meta($obj_id, '_gnn_hero_custom_text', true);
+        $enable_slider = get_theme_mod('enable_hero_slider', false);
 
-        if ($hero_type !== 'hidden'):
+        if (is_front_page() && $enable_slider):
+            $slider_speed = get_theme_mod('slider_speed', 6000);
+            $slider_pause = get_theme_mod('slider_pause_hover', true) ? 'true' : 'false';
+            $show_nav = get_theme_mod('slider_show_nav', true);
+            $show_dots = get_theme_mod('slider_show_dots', true);
             ?>
-            <div class="hero-container drift <?php echo 'hero-' . esc_attr($hero_type); ?>">
+            <div class="gnn-hero-slider-wrapper" 
+                 data-speed="<?php echo esc_attr($slider_speed); ?>" 
+                 data-pause="<?php echo esc_attr($slider_pause); ?>">
+                <div class="gnn-hero-slider">
+                    <?php for ($i = 1; $i <= 3; $i++): 
+                        $img = get_theme_mod("slider_image_{$i}");
+                        $title = get_theme_mod("slider_title_{$i}");
+                        $sub = get_theme_mod("slider_subtitle_{$i}");
+                        $link = get_theme_mod("slider_link_{$i}");
+                        if (!$img && !$title) continue;
+                    ?>
+                    <div class="gnn-slide" aria-label="<?php printf(esc_attr__('Slide %d', 'gnn-antigravity'), $i); ?>">
+                        <?php if ($img): ?>
+                            <div class="slide-bg" style="background-image: url('<?php echo esc_url($img); ?>');"></div>
+                        <?php endif; ?>
+                        <div class="hero-media-overlay"></div>
+                        <div class="hero-content-wrapper">
+                            <?php if ($title): ?>
+                                <h1 class="hero-title"><?php echo esc_html($title); ?></h1>
+                            <?php endif; ?>
+                            <?php if ($sub): ?>
+                                <p class="hero-subtitle"><?php echo esc_html($sub); ?></p>
+                            <?php endif; ?>
+                            <?php if ($link): ?>
+                                <a href="<?php echo esc_url($link); ?>" class="gnn-btn slide-btn"><?php esc_html_e('Explore', 'gnn-antigravity'); ?></a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endfor; ?>
+                </div>
 
+                <?php if ($show_nav): ?>
+                <div class="slider-nav">
+                    <button class="slider-prev" aria-label="<?php esc_attr_e('Previous slide', 'gnn-antigravity'); ?>">←</button>
+                    <button class="slider-next" aria-label="<?php esc_attr_e('Next slide', 'gnn-antigravity'); ?>">→</button>
+                </div>
+                <?php endif; ?>
+
+                <?php if ($show_dots): ?>
+                <div class="slider-dots"></div>
+                <?php endif; ?>
+            </div>
+
+        <?php elseif ($hero_type !== 'hidden'): ?>
+            <div class="hero-container drift <?php echo 'hero-' . esc_attr($hero_type); ?>">
+                <!-- Static Hero Logic -->
                 <?php if ($hero_type === 'video' && $hero_media): ?>
                     <?php
                     $yt_id = gnn_get_youtube_id($hero_media);
@@ -153,5 +209,6 @@
                 </div>
             </div>
         <?php endif; ?>
+
 
         <div id="content-area">

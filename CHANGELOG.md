@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.6.0] - 2026-04-25
+### Added
+- **Native Hero Slider:** A zero-dependency, GSAP-powered, and touch-enabled image/content slider fully manageable via the Customizer.
+- **Advanced Navigation:** Implemented scroll-based header glassmorphism and GSAP-powered magnetic dropdown menus.
+- **`theme.json` Design System:** Synchronized Customizer variables with Gutenberg block editor for cohesive styling.
+- **Security Integrations:** Added native support for Cloudflare Turnstile and Google reCAPTCHA v3 fallback for bot protection (`inc/security.php`).
+- **Analytics:** Integrated Google Analytics (GA4) with custom event tracking for slider interactions and UI usage (`inc/analytics.php`).
+
+### Security
+- Performed Sprint 3 Security Audit. Verified `ABSPATH` protection, POST sanitization, and escaping in all new modules.
+
 ## [1.5.0] - 2026-04-23
 ### Added
 - **Customizer Live Preview:** Added Selective Refresh partials and postMessage transport for instant UI feedback (`assets/js/customizer-preview.js`).

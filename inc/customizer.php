@@ -78,9 +78,191 @@ function gnn_antigravity_customize_register($wp_customize)
         'priority' => 60,
     ));
 
+    // =========================================================================
+    // SECTION: Security
+    // =========================================================================
+    $wp_customize->add_section('gnn_security', array(
+        'title'    => esc_html__('Security Settings', 'gnn-antigravity'),
+        'panel'    => 'gnn_theme_panel',
+        'priority' => 70,
+        'description' => esc_html__('Manage bot protection and security keys.', 'gnn-antigravity'),
+    ));
+
+    // ... (Security settings) ...
+
+    // =========================================================================
+    // SECTION: Analytics
+    // =========================================================================
+    $wp_customize->add_section('gnn_analytics', array(
+        'title'    => esc_html__('Analytics Settings', 'gnn-antigravity'),
+        'panel'    => 'gnn_theme_panel',
+        'priority' => 80,
+    ));
+
+    // GA4 Measurement ID
+    $wp_customize->add_setting('ga4_measurement_id', array('default' => '', 'sanitize_callback' => 'sanitize_text_field'));
+    $wp_customize->add_control('ga4_measurement_id', array(
+        'label'       => esc_html__('GA4 Measurement ID', 'gnn-antigravity'),
+        'description' => esc_html__('Enter your G-XXXXXXXXXX ID to enable Google Analytics.', 'gnn-antigravity'),
+        'section'     => 'gnn_analytics',
+        'type'        => 'text',
+    ));
+
+
+    // Turnstile Toggle
+    $wp_customize->add_setting('enable_turnstile', array('default' => false, 'sanitize_callback' => 'gnn_sanitize_checkbox'));
+    $wp_customize->add_control('enable_turnstile', array(
+        'label'   => esc_html__('Enable Cloudflare Turnstile', 'gnn-antigravity'),
+        'section' => 'gnn_security',
+        'type'    => 'checkbox',
+    ));
+
+    // Turnstile Site Key
+    $wp_customize->add_setting('turnstile_site_key', array('default' => '', 'sanitize_callback' => 'sanitize_text_field'));
+    $wp_customize->add_control('turnstile_site_key', array(
+        'label'   => esc_html__('Turnstile Site Key', 'gnn-antigravity'),
+        'section' => 'gnn_security',
+        'type'    => 'text',
+    ));
+
+    // Turnstile Secret Key
+    $wp_customize->add_setting('turnstile_secret_key', array('default' => '', 'sanitize_callback' => 'sanitize_text_field'));
+    $wp_customize->add_control('turnstile_secret_key', array(
+        'label'   => esc_html__('Turnstile Secret Key', 'gnn-antigravity'),
+        'section' => 'gnn_security',
+        'type'    => 'text',
+    ));
+
+    // reCAPTCHA v3 Site Key
+    $wp_customize->add_setting('recaptcha_site_key', array('default' => '', 'sanitize_callback' => 'sanitize_text_field'));
+    $wp_customize->add_control('recaptcha_site_key', array(
+        'label'   => esc_html__('reCAPTCHA v3 Site Key', 'gnn-antigravity'),
+        'section' => 'gnn_security',
+        'type'    => 'text',
+    ));
+
+    // reCAPTCHA v3 Secret Key
+    $wp_customize->add_setting('recaptcha_secret_key', array('default' => '', 'sanitize_callback' => 'sanitize_text_field'));
+    $wp_customize->add_control('recaptcha_secret_key', array(
+        'label'   => esc_html__('reCAPTCHA v3 Secret Key', 'gnn-antigravity'),
+        'section' => 'gnn_security',
+        'type'    => 'text',
+    ));
+
+
+
+    // =========================================================================
+    // SECTION: Slider
+    // =========================================================================
+    $wp_customize->add_section('gnn_slider_section', array(
+        'title'    => esc_html__('Hero Slider', 'gnn-antigravity'),
+        'panel'    => 'gnn_theme_panel',
+        'priority' => 15,
+        'description' => esc_html__('Enable and configure the hero carousel.', 'gnn-antigravity'),
+    ));
+
+    // Enable Slider
+    $wp_customize->add_setting('enable_hero_slider', array('default' => false, 'sanitize_callback' => 'gnn_sanitize_checkbox'));
+    $wp_customize->add_control('enable_hero_slider', array(
+        'label'   => esc_html__('Enable Hero Slider', 'gnn-antigravity'),
+        'section' => 'gnn_slider_section',
+        'type'    => 'checkbox',
+    ));
+
+    // Slider Height (Desktop)
+    $wp_customize->add_setting('slider_height_desktop', array('default' => '100', 'sanitize_callback' => 'absint', 'transport' => 'postMessage'));
+    $wp_customize->add_control('slider_height_desktop', array(
+        'label'       => esc_html__('Slider Height (Desktop vh)', 'gnn-antigravity'),
+        'section'     => 'gnn_slider_section',
+        'type'        => 'number',
+        'input_attrs' => array('min' => 40, 'max' => 100, 'step' => 5),
+    ));
+
+    // Slider Height (Mobile)
+    $wp_customize->add_setting('slider_height_mobile', array('default' => '70', 'sanitize_callback' => 'absint', 'transport' => 'postMessage'));
+    $wp_customize->add_control('slider_height_mobile', array(
+        'label'       => esc_html__('Slider Height (Mobile vh)', 'gnn-antigravity'),
+        'section'     => 'gnn_slider_section',
+        'type'        => 'number',
+        'input_attrs' => array('min' => 40, 'max' => 100, 'step' => 5),
+    ));
+
+    // Autoplay Speed
+    $wp_customize->add_setting('slider_speed', array('default' => '6000', 'sanitize_callback' => 'absint'));
+    $wp_customize->add_control('slider_speed', array(
+        'label'   => esc_html__('Autoplay Speed (ms)', 'gnn-antigravity'),
+        'section' => 'gnn_slider_section',
+        'type'    => 'select',
+        'choices' => array(
+            '3000' => '3 Seconds',
+            '5000' => '5 Seconds',
+            '6000' => '6 Seconds',
+            '8000' => '8 Seconds',
+            '0'    => 'Manual Only',
+        ),
+    ));
+
+    // UI Controls
+    $wp_customize->add_setting('slider_show_nav', array('default' => true, 'sanitize_callback' => 'gnn_sanitize_checkbox'));
+    $wp_customize->add_control('slider_show_nav', array(
+        'label'   => esc_html__('Show Nav Arrows', 'gnn-antigravity'),
+        'section' => 'gnn_slider_section',
+        'type'    => 'checkbox',
+    ));
+
+    $wp_customize->add_setting('slider_show_dots', array('default' => true, 'sanitize_callback' => 'gnn_sanitize_checkbox'));
+    $wp_customize->add_control('slider_show_dots', array(
+        'label'   => esc_html__('Show Pagination Dots', 'gnn-antigravity'),
+        'section' => 'gnn_slider_section',
+        'type'    => 'checkbox',
+    ));
+
+    $wp_customize->add_setting('slider_pause_hover', array('default' => true, 'sanitize_callback' => 'gnn_sanitize_checkbox'));
+    $wp_customize->add_control('slider_pause_hover', array(
+        'label'   => esc_html__('Pause on Hover', 'gnn-antigravity'),
+        'section' => 'gnn_slider_section',
+        'type'    => 'checkbox',
+    ));
+
+
+    // Slide loop (3 slides)
+    for ($i = 1; $i <= 3; $i++) {
+        // Image
+        $wp_customize->add_setting("slider_image_{$i}", array('default' => '', 'sanitize_callback' => 'esc_url_raw'));
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "slider_image_{$i}", array(
+            'label'    => sprintf(esc_html__('Slide %d Image', 'gnn-antigravity'), $i),
+            'section'  => 'gnn_slider_section',
+        )));
+
+        // Title
+        $wp_customize->add_setting("slider_title_{$i}", array('default' => '', 'sanitize_callback' => 'sanitize_text_field', 'transport' => 'postMessage'));
+        $wp_customize->add_control("slider_title_{$i}", array(
+            'label'    => sprintf(esc_html__('Slide %d Title', 'gnn-antigravity'), $i),
+            'section'  => 'gnn_slider_section',
+            'type'     => 'text',
+        ));
+
+        // Subtitle
+        $wp_customize->add_setting("slider_subtitle_{$i}", array('default' => '', 'sanitize_callback' => 'sanitize_text_field', 'transport' => 'postMessage'));
+        $wp_customize->add_control("slider_subtitle_{$i}", array(
+            'label'    => sprintf(esc_html__('Slide %d Subtitle', 'gnn-antigravity'), $i),
+            'section'  => 'gnn_slider_section',
+            'type'     => 'textarea',
+        ));
+
+        // Link
+        $wp_customize->add_setting("slider_link_{$i}", array('default' => '', 'sanitize_callback' => 'esc_url_raw'));
+        $wp_customize->add_control("slider_link_{$i}", array(
+            'label'    => sprintf(esc_html__('Slide %d Link URL', 'gnn-antigravity'), $i),
+            'section'  => 'gnn_slider_section',
+            'type'     => 'url',
+        ));
+    }
+
     // =====================================================================
     // SETTINGS: Hero
     // =====================================================================
+
     $hero_settings = array(
         'hero_title'    => array('default' => 'Build the new way.', 'label' => 'Hero Title', 'type' => 'text'),
         'hero_subtitle' => array('default' => 'Experimental workspace for agentic development.', 'label' => 'Hero Subtitle', 'type' => 'textarea'),

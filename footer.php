@@ -9,6 +9,12 @@
     </button>
 <?php endif; ?>
 
+<?php if (get_theme_mod('enable_custom_cursor', true)): ?>
+    <div class="gnn-cursor"></div>
+    <div class="gnn-cursor-follower"></div>
+<?php endif; ?>
+
+
 <footer class="site-bottom-bar">
     <nav class="corner-nav bottom-left">
         <?php

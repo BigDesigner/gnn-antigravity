@@ -47,12 +47,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. INTERACTION ENGINE (Expert Mode) ---
     const initInteractionEngine = () => {
+        initCustomCursor();
         initMagnetic();
         initGlitch();
         initMobileMenu();
         initHeaderScroll();
         initDropdowns();
         initHeroSlider();
+    };
+
+    // --- 3a. CUSTOM CURSOR (UI-002) ---
+    let cursorInitialized = false;
+    
+    const initCustomCursor = () => {
+        if (typeof gnnSettings !== 'undefined' && !gnnSettings.customCursor) return;
+        
+        // Touch devices usually don't have a fine pointer, so CSS handles hiding it,
+        // but we can also avoid running heavy JS on them.
+        if (window.matchMedia("(pointer: coarse)").matches) return;
+
+        const cursor = document.querySelector('.gnn-cursor');
+        const follower = document.querySelector('.gnn-cursor-follower');
+        
+        if (!cursor || !follower) return;
+
+        document.body.classList.add('has-custom-cursor');
+
+        // Only attach mousemove once globally
+        if (!cursorInitialized) {
+            let xTo = gsap.quickTo(cursor, "x", {duration: 0.1, ease: "power3"});
+            let yTo = gsap.quickTo(cursor, "y", {duration: 0.1, ease: "power3"});
+            
+            let fXTo = gsap.quickTo(follower, "x", {duration: 0.6, ease: "power3"});
+            let fYTo = gsap.quickTo(follower, "y", {duration: 0.6, ease: "power3"});
+
+            window.addEventListener("mousemove", (e) => {
+                xTo(e.clientX);
+                yTo(e.clientY);
+                fXTo(e.clientX);
+                fYTo(e.clientY);
+            });
+            cursorInitialized = true;
+        }
+
+        // Hover effect for links and buttons (re-attached on Swup transitions)
+        const hoverElements = document.querySelectorAll('a, button, input, textarea, select, .gnn-service-card');
+        hoverElements.forEach(el => {
+            // Remove old listeners just in case
+            const enter = () => {
+                cursor.classList.add('is-hovering');
+                follower.classList.add('is-hovering');
+            };
+            const leave = () => {
+                cursor.classList.remove('is-hovering');
+                follower.classList.remove('is-hovering');
+            };
+            
+            // This ensures we don't duplicate on same elements during partial updates
+            el.addEventListener('mouseenter', enter);
+            el.addEventListener('mouseleave', leave);
+        });
     };
 
     // --- 3a. HERO SLIDER (CUST-002) ---

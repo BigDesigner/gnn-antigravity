@@ -37,8 +37,8 @@ jobs:
           # Define zip name
           ZIP_NAME="gnn-antigravity-${{ env.VERSION }}.zip"
           
-          # Create a temporary directory for clean build
-          mkdir build
+          # Create a temporary directory for clean build and a subfolder for the theme
+          mkdir -p build/gnn-antigravity
           
           # Use rsync to copy files, excluding the build directory itself and other dev files
           # This is more robust than 'cp' for recursive situations
@@ -54,10 +54,10 @@ jobs:
                     --exclude='implementation_plan.md' \
                     --exclude='task.md' \
                     --exclude='walkthrough.md' \
-                    ./ build/
+                    ./ build/gnn-antigravity/
           
-          # Zip the build directory
-          cd build && zip -r "../$ZIP_NAME" . && cd ..
+          # Zip the build directory (this will include the gnn-antigravity folder)
+          cd build && zip -r "../$ZIP_NAME" gnn-antigravity && cd ..
           
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
 

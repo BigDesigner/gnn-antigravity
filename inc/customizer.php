@@ -149,7 +149,22 @@ function gnn_antigravity_customize_register($wp_customize)
         'type'    => 'text',
     ));
 
+    // =========================================================================
+    // SECTION: UI Experience
+    // =========================================================================
+    $wp_customize->add_section('gnn_ui', array(
+        'title'    => esc_html__('UI Experience', 'gnn-antigravity'),
+        'panel'    => 'gnn_theme_panel',
+        'priority' => 85,
+    ));
 
+    // Custom Cursor Toggle
+    $wp_customize->add_setting('enable_custom_cursor', array('default' => true, 'sanitize_callback' => 'gnn_sanitize_checkbox'));
+    $wp_customize->add_control('enable_custom_cursor', array(
+        'label'   => esc_html__('Enable Custom Magnetic Cursor', 'gnn-antigravity'),
+        'section' => 'gnn_ui',
+        'type'    => 'checkbox',
+    ));
 
     // =========================================================================
     // SECTION: Slider

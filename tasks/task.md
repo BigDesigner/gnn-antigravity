@@ -26,6 +26,7 @@
 - [x] ANA-001: Implement Google Analytics (GA4) integration via Customizer.
 
 ## Backlog
-- [ ] PERF-001: Implement asset optimization (minification, critical CSS).
+- [x] PERF-001: Implement asset optimization (minification, critical CSS).
+- [x] UI-002: Implement Custom Magnetic Cursor via GSAP.
 - [ ] A11Y-001: Accessibility audit and improvements.
 - [ ] I18N-001: Translation-readiness audit and .pot file generation.

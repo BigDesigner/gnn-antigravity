@@ -22,3 +22,5 @@
 | 2026-04-25 | ANA-001 | Integrated Google Analytics (GA4) with custom event tracking | Code review |
 | 2026-04-25 | SEC-002 | Implemented Google reCAPTCHA v3 fallback for bot protection | Code review |
 | 2026-04-25 | AUDIT-02 | Sprint 3 Security & Architecture Audit | Automated Static Review |
+| 2026-04-25 | PERF-001 | Implemented JS deferring, Preconnect headers, and dynamic cache-busting | PageSpeed evaluation |
+| 2026-04-25 | UI-002 | Implemented Custom Magnetic Cursor via GSAP with Customizer toggle | UI Test |

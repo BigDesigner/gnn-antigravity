@@ -7,6 +7,12 @@
  * detected, it appears in Appearance > Themes and Dashboard > Updates
  * just like themes from wordpress.org.
  *
+ * Features:
+ * - Enable/disable via Customizer toggle (GNN Theme Options > Updates).
+ * - Manual "Check Now" button under Appearance > Theme Updates.
+ * - 12-hour API response caching to respect GitHub rate limits.
+ * - Automatic folder renaming after update extraction.
+ *
  * Requirements:
  * - The GitHub repository must be PUBLIC (or a personal access token must be provided).
  * - GitHub Releases must have a tag matching `vX.Y.Z` format.
@@ -68,13 +74,213 @@ class GNN_GitHub_Updater {
      * Initialize hooks.
      */
     public function __construct() {
-        add_filter( 'pre_set_site_transient_update_themes', array( $this, 'check_for_update' ) );
-        add_filter( 'themes_api', array( $this, 'theme_info' ), 20, 3 );
-        add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
+        // Only register update hooks if auto-update is enabled.
+        if ( get_theme_mod( 'enable_github_updates', true ) ) {
+            add_filter( 'pre_set_site_transient_update_themes', array( $this, 'check_for_update' ) );
+            add_filter( 'themes_api', array( $this, 'theme_info' ), 20, 3 );
+            add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
+            add_action( 'load-update-core.php', array( $this, 'clear_cache' ) );
+        }
 
-        // Clear cache when user manually clicks "Check Again" on the updates page.
-        add_action( 'load-update-core.php', array( $this, 'clear_cache' ) );
+        // Always register the admin page and Customizer setting (so user can toggle it).
+        add_action( 'admin_menu', array( $this, 'register_admin_page' ) );
+        add_action( 'admin_init', array( $this, 'handle_manual_check' ) );
+        add_action( 'customize_register', array( $this, 'register_customizer_settings' ) );
     }
+
+    // =========================================================================
+    // Customizer Settings
+    // =========================================================================
+
+    /**
+     * Register update-related settings in the Customizer.
+     *
+     * @param WP_Customize_Manager $wp_customize Customizer manager instance.
+     * @return void
+     */
+    public function register_customizer_settings( $wp_customize ) {
+        // Section
+        $wp_customize->add_section( 'gnn_updates', array(
+            'title'       => esc_html__( 'Theme Updates', 'gnn-antigravity' ),
+            'panel'       => 'gnn_theme_panel',
+            'priority'    => 90,
+            'description' => esc_html__( 'Control how the theme checks for updates from GitHub.', 'gnn-antigravity' ),
+        ) );
+
+        // Toggle: Enable/Disable auto-update
+        $wp_customize->add_setting( 'enable_github_updates', array(
+            'default'           => true,
+            'sanitize_callback' => 'gnn_sanitize_checkbox',
+        ) );
+        $wp_customize->add_control( 'enable_github_updates', array(
+            'label'       => esc_html__( 'Enable Automatic Update Checks', 'gnn-antigravity' ),
+            'description' => esc_html__( 'When enabled, the theme will periodically check GitHub for new releases and show update notifications in the WordPress dashboard.', 'gnn-antigravity' ),
+            'section'     => 'gnn_updates',
+            'type'        => 'checkbox',
+        ) );
+    }
+
+    // =========================================================================
+    // Admin Page — Manual Check
+    // =========================================================================
+
+    /**
+     * Register the "Theme Updates" page under Appearance menu.
+     *
+     * @return void
+     */
+    public function register_admin_page() {
+        add_theme_page(
+            esc_html__( 'Theme Updates', 'gnn-antigravity' ),
+            esc_html__( 'Theme Updates', 'gnn-antigravity' ),
+            'update_themes',
+            'gnn-theme-updates',
+            array( $this, 'render_admin_page' )
+        );
+    }
+
+    /**
+     * Render the Theme Updates admin page.
+     *
+     * Shows current version, latest remote version, update status,
+     * and a "Check Now" button.
+     *
+     * @return void
+     */
+    public function render_admin_page() {
+        $local_version  = wp_get_theme( $this->theme_slug )->get( 'Version' );
+        $is_enabled     = get_theme_mod( 'enable_github_updates', true );
+        $release        = $is_enabled ? $this->get_remote_release() : false;
+        $has_update     = ( $release && version_compare( $release->version, $local_version, '>' ) );
+        $last_checked   = get_transient( $this->transient_key ) ? true : false;
+        ?>
+        <div class="wrap">
+            <h1><?php esc_html_e( 'GNN Theme Updates', 'gnn-antigravity' ); ?></h1>
+
+            <div class="card" style="max-width: 600px; padding: 1.5em;">
+                <h2 style="margin-top: 0;"><?php esc_html_e( 'Update Status', 'gnn-antigravity' ); ?></h2>
+                
+                <table class="form-table" role="presentation">
+                    <tr>
+                        <th><?php esc_html_e( 'Installed Version', 'gnn-antigravity' ); ?></th>
+                        <td><code><?php echo esc_html( $local_version ); ?></code></td>
+                    </tr>
+                    <tr>
+                        <th><?php esc_html_e( 'Latest Version', 'gnn-antigravity' ); ?></th>
+                        <td>
+                            <?php if ( ! $is_enabled ) : ?>
+                                <em><?php esc_html_e( 'Auto-updates are disabled.', 'gnn-antigravity' ); ?></em>
+                            <?php elseif ( $release ) : ?>
+                                <code><?php echo esc_html( $release->version ); ?></code>
+                                <?php if ( $has_update ) : ?>
+                                    <span style="color: #d63638; font-weight: 600; margin-left: 8px;">
+                                        ⬆ <?php esc_html_e( 'Update available!', 'gnn-antigravity' ); ?>
+                                    </span>
+                                <?php else : ?>
+                                    <span style="color: #00a32a; font-weight: 600; margin-left: 8px;">
+                                        ✓ <?php esc_html_e( 'You are up to date.', 'gnn-antigravity' ); ?>
+                                    </span>
+                                <?php endif; ?>
+                            <?php else : ?>
+                                <em><?php esc_html_e( 'Could not reach GitHub. Try again later.', 'gnn-antigravity' ); ?></em>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php esc_html_e( 'Auto-Updates', 'gnn-antigravity' ); ?></th>
+                        <td>
+                            <?php if ( $is_enabled ) : ?>
+                                <span style="color: #00a32a;">● <?php esc_html_e( 'Enabled', 'gnn-antigravity' ); ?></span>
+                            <?php else : ?>
+                                <span style="color: #d63638;">● <?php esc_html_e( 'Disabled', 'gnn-antigravity' ); ?></span>
+                                — <a href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=gnn_updates' ) ); ?>">
+                                    <?php esc_html_e( 'Enable in Customizer', 'gnn-antigravity' ); ?>
+                                </a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php if ( $release && ! empty( $release->published_at ) ) : ?>
+                    <tr>
+                        <th><?php esc_html_e( 'Release Date', 'gnn-antigravity' ); ?></th>
+                        <td><?php echo esc_html( date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $release->published_at ) ) ); ?></td>
+                    </tr>
+                    <?php endif; ?>
+                </table>
+
+                <hr>
+
+                <p class="submit" style="display: flex; gap: 12px; align-items: center;">
+                    <?php
+                    $check_url = wp_nonce_url(
+                        admin_url( 'themes.php?page=gnn-theme-updates&gnn_check_update=1' ),
+                        'gnn_manual_update_check'
+                    );
+                    ?>
+                    <a href="<?php echo esc_url( $check_url ); ?>" class="button button-primary">
+                        <?php esc_html_e( 'Check for Updates Now', 'gnn-antigravity' ); ?>
+                    </a>
+
+                    <?php if ( $has_update ) : ?>
+                        <a href="<?php echo esc_url( admin_url( 'update-core.php' ) ); ?>" class="button button-secondary">
+                            <?php esc_html_e( 'Go to WordPress Updates', 'gnn-antigravity' ); ?>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if ( $release && ! empty( $release->html_url ) ) : ?>
+                        <a href="<?php echo esc_url( $release->html_url ); ?>" target="_blank" rel="noopener noreferrer" class="button button-link">
+                            <?php esc_html_e( 'View on GitHub ↗', 'gnn-antigravity' ); ?>
+                        </a>
+                    <?php endif; ?>
+                </p>
+            </div>
+
+            <?php if ( $release && ! empty( $release->changelog ) ) : ?>
+            <div class="card" style="max-width: 600px; padding: 1.5em; margin-top: 1em;">
+                <h2 style="margin-top: 0;"><?php esc_html_e( 'Changelog', 'gnn-antigravity' ); ?></h2>
+                <div style="background: #f6f7f7; padding: 1em; border-radius: 4px; font-size: 13px; line-height: 1.6;">
+                    <?php echo nl2br( esc_html( $release->changelog ) ); ?>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php
+    }
+
+    /**
+     * Handle the manual "Check Now" button click.
+     *
+     * Clears the cached transient and redirects back to the page
+     * with a fresh API check.
+     *
+     * @return void
+     */
+    public function handle_manual_check() {
+        if ( ! isset( $_GET['gnn_check_update'] ) || '1' !== $_GET['gnn_check_update'] ) {
+            return;
+        }
+
+        if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'gnn_manual_update_check' ) ) {
+            wp_die( esc_html__( 'Security check failed.', 'gnn-antigravity' ) );
+        }
+
+        if ( ! current_user_can( 'update_themes' ) ) {
+            wp_die( esc_html__( 'You do not have permission to perform this action.', 'gnn-antigravity' ) );
+        }
+
+        // Clear cache to force a fresh API call.
+        delete_transient( $this->transient_key );
+
+        // Also delete WP's own theme update transient so it re-checks immediately.
+        delete_site_transient( 'update_themes' );
+
+        // Redirect back (without the query params) to trigger a clean page load.
+        wp_safe_redirect( admin_url( 'themes.php?page=gnn-theme-updates&checked=1' ) );
+        exit;
+    }
+
+    // =========================================================================
+    // GitHub API
+    // =========================================================================
 
     /**
      * Fetch the latest release data from GitHub API.
@@ -150,6 +356,10 @@ class GNN_GitHub_Updater {
 
         return $release_data;
     }
+
+    // =========================================================================
+    // WordPress Update Pipeline Hooks
+    // =========================================================================
 
     /**
      * Hook into the theme update check transient.

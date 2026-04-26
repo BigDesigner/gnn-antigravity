@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.8.1] - 2026-04-26
+### Added
+- **Update Control Panel:** New admin page under Appearance > Theme Updates showing installed version, latest GitHub version, update status (✓ up to date / ⬆ update available), release date, and changelog.
+- **Manual Check Button:** "Check for Updates Now" button with nonce-protected action that clears the API cache and forces a fresh GitHub check.
+- **Customizer Toggle:** New `enable_github_updates` checkbox under GNN Theme Options > Theme Updates to enable/disable automatic update checks entirely.
+
 ## [1.8.0] - 2026-04-26
 ### Added
 - **GitHub Auto-Updater:** New `inc/updater.php` module that integrates with WordPress's native update system. Checks GitHub Releases API for new versions (with 12-hour caching), shows update notifications in the WP Admin dashboard, and handles theme folder renaming after extraction. No 3rd-party plugin required.

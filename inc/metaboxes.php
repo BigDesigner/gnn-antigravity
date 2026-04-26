@@ -1,12 +1,22 @@
 <?php
 /**
  * GNN Meta Box Controls
+ *
+ * Registers and renders custom meta boxes for posts and pages.
+ *
+ * @package GNN-antigravity
+ * @since   1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+/**
+ * Register the main GNN metadata meta box.
+ *
+ * @return void
+ */
 function gnn_add_metadata_metabox()
 {
     $screens = array('post', 'page');
@@ -16,6 +26,12 @@ function gnn_add_metadata_metabox()
 }
 add_action('add_meta_boxes', 'gnn_add_metadata_metabox');
 
+/**
+ * Render the GNN metadata meta box content.
+ *
+ * @param WP_Post $post Current post object.
+ * @return void
+ */
 function gnn_render_metadata_metabox($post)
 {
     wp_nonce_field('gnn_save_metadata_nonce', 'gnn_metadata_nonce');
@@ -47,6 +63,12 @@ function gnn_render_metadata_metabox($post)
     echo '</div>';
 }
 
+/**
+ * Save the GNN metadata meta box data.
+ *
+ * @param int $post_id Post ID.
+ * @return void
+ */
 function gnn_save_metadata_metabox($post_id)
 {
     // Sanity checks

@@ -24,3 +24,8 @@
 | 2026-04-25 | AUDIT-02 | Sprint 3 Security & Architecture Audit | Automated Static Review |
 | 2026-04-25 | PERF-001 | Implemented JS deferring, Preconnect headers, and dynamic cache-busting | PageSpeed evaluation |
 | 2026-04-25 | UI-002 | Implemented Custom Magnetic Cursor via GSAP with Customizer toggle | UI Test |
+| 2026-04-26 | DOC-SYNC | Synced Memory Bank & Task files to reflect v1.6.0 completion | Manual audit |
+| 2026-04-26 | A11Y-001 | Full A11Y audit: Skip-link, Focus-visible, Accessible Hamburger, Keyboard Slider | Code review |
+| 2026-04-26 | ELM-004 | Removed theme-forced wrappers from Elementor templates (Standard 5.2) | Code review |
+| 2026-04-26 | DOC-001 | Finalized PHPDoc blocks across all inc/ files for production standards | Code review |
+| 2026-04-26 | PERF-002 | Expanded Critical CSS in header to prevent FOUC for primary UI elements | Manual verification |

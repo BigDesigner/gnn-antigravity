@@ -13,19 +13,33 @@
         }
 
         .site-top-bar {
-    position: fixed !important;
-    width: 100%;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2000;
-    padding: 0 2rem;
-    height: var(--header-height, 80px);
-    background: transparent;
-    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
+            position: fixed !important;
+            width: 100%;
+            left: 0;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2000;
+            padding: 0 2rem;
+            height: var(--header-height, 80px);
+            background: transparent;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin: 0;
+        }
+
+        .corner-nav {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
 
 .site-top-bar.is-scrolled {
     background: rgba(0, 0, 0, 0.8);
@@ -56,6 +70,7 @@
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
+    <a class="skip-link screen-reader-text" href="#content-area"><?php esc_html_e( 'Skip to content', 'gnn-antigravity' ); ?></a>
 
     <div id="mobile-menu-overlay">
         <div class="mobile-menu-content">
@@ -86,7 +101,7 @@
 
 
         <div class="nav-right-container" style="display: flex; align-items: center;">
-            <nav class="corner-nav top-right desktop-only">
+            <nav class="corner-nav top-right desktop-only" aria-label="<?php esc_attr_e('Primary Menu', 'gnn-antigravity'); ?>">
                 <?php
                 wp_nav_menu(array(
                     'theme_location' => 'header-menu',
@@ -97,7 +112,11 @@
                 ?>
             </nav>
             <?php if (get_theme_mod('enable_mobile_menu', true)): ?>
-                <div id="hamburger-menu" class="mobile-only">
+                <div id="hamburger-menu" class="mobile-only" 
+                     role="button" 
+                     tabindex="0" 
+                     aria-expanded="false" 
+                     aria-label="<?php esc_attr_e('Toggle Menu', 'gnn-antigravity'); ?>">
                     <span></span><span></span>
                 </div>
             <?php endif; ?>
@@ -119,6 +138,8 @@
             $show_dots = get_theme_mod('slider_show_dots', true);
             ?>
             <div class="gnn-hero-slider-wrapper" 
+                 tabindex="0"
+                 aria-label="<?php esc_attr_e('Hero Slider', 'gnn-antigravity'); ?>"
                  data-speed="<?php echo esc_attr($slider_speed); ?>" 
                  data-pause="<?php echo esc_attr($slider_pause); ?>">
                 <div class="gnn-hero-slider">

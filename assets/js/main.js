@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // This ensures we don't duplicate on same elements during partial updates
             el.addEventListener('mouseenter', enter);
             el.addEventListener('mouseleave', leave);
+            el.addEventListener('focusin', enter);
+            el.addEventListener('focusout', leave);
         });
     };
 
@@ -213,6 +215,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (prevBtn) prevBtn.addEventListener('click', () => {
             showSlide((currentIndex - 1 + slides.length) % slides.length, 'prev');
             resetAutoPlay();
+        });
+        
+        // Keyboard Navigation
+        sliderWrapper.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevBtn?.click();
+            } else if (e.key === 'ArrowRight') {
+                nextBtn?.click();
+            }
         });
 
         // Touch/Swipe Support
@@ -322,6 +333,21 @@ document.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('mouseleave', () => {
                 gsap.to(subMenu, { opacity: 0, y: 10, display: 'none', duration: 0.3, ease: "power3.in" });
             });
+
+            // Focus support for accessibility
+            item.addEventListener('focusin', () => {
+                gsap.fromTo(subMenu, 
+                    { opacity: 0, y: 10, display: 'none' },
+                    { opacity: 1, y: 0, display: 'block', duration: 0.4, ease: "power3.out" }
+                );
+            });
+
+            item.addEventListener('focusout', (e) => {
+                // Only hide if focus left the entire menu item (including sub-menu)
+                if (!item.contains(e.relatedTarget)) {
+                    gsap.to(subMenu, { opacity: 0, y: 10, display: 'none', duration: 0.3, ease: "power3.in" });
+                }
+            });
         });
     };
 
@@ -339,13 +365,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeMenu = () => {
             hamburger.classList.remove('is-active');
             mobileOverlay.classList.remove('is-active');
+            hamburger.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
         };
 
         const toggleMenu = (e) => {
-            e.preventDefault();
+            if (e) e.preventDefault();
             const isActive = hamburger.classList.toggle('is-active');
             mobileOverlay.classList.toggle('is-active', isActive);
+            hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
             document.body.style.overflow = isActive ? 'hidden' : '';
 
             if (isActive) {
@@ -355,12 +383,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     stagger: 0.1,
                     duration: 0.6,
                     ease: "power4.out",
-                    delay: 0.2
+                    delay: 0.2,
+                    onComplete: () => {
+                        // Focus first link for keyboard users
+                        const firstLink = mobileOverlay.querySelector('a');
+                        if (firstLink) firstLink.focus();
+                    }
                 });
             }
         };
 
         hamburger.addEventListener('click', toggleMenu);
+        
+        hamburger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                toggleMenu(e);
+            }
+        });
 
         mobileOverlay.addEventListener('click', (e) => {
             if (e.target.tagName === 'A' || e.target === mobileOverlay) {

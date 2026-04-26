@@ -209,11 +209,11 @@ function gnn_antigravity_customize_register($wp_customize)
         'section' => 'gnn_slider_section',
         'type'    => 'select',
         'choices' => array(
-            '3000' => '3 Seconds',
-            '5000' => '5 Seconds',
-            '6000' => '6 Seconds',
-            '8000' => '8 Seconds',
-            '0'    => 'Manual Only',
+            '3000' => esc_html__('3 Seconds', 'gnn-antigravity'),
+            '5000' => esc_html__('5 Seconds', 'gnn-antigravity'),
+            '6000' => esc_html__('6 Seconds', 'gnn-antigravity'),
+            '8000' => esc_html__('8 Seconds', 'gnn-antigravity'),
+            '0'    => esc_html__('Manual Only', 'gnn-antigravity'),
         ),
     ));
 
@@ -279,27 +279,27 @@ function gnn_antigravity_customize_register($wp_customize)
     // =====================================================================
 
     $hero_settings = array(
-        'hero_title'    => array('default' => 'Build the new way.', 'label' => 'Hero Title', 'type' => 'text'),
-        'hero_subtitle' => array('default' => 'Experimental workspace for agentic development.', 'label' => 'Hero Subtitle', 'type' => 'textarea'),
+        'hero_title'    => array('default' => esc_html__('Build the new way.', 'gnn-antigravity'), 'label' => esc_html__('Hero Title', 'gnn-antigravity'), 'type' => 'text'),
+        'hero_subtitle' => array('default' => esc_html__('Experimental workspace for agentic development.', 'gnn-antigravity'), 'label' => esc_html__('Hero Subtitle', 'gnn-antigravity'), 'type' => 'textarea'),
     );
     foreach ($hero_settings as $id => $args) {
         $wp_customize->add_setting($id, array('default' => $args['default'], 'sanitize_callback' => 'sanitize_text_field'));
-        $wp_customize->add_control($id, array('label' => esc_html__($args['label'], 'gnn-antigravity'), 'section' => 'gnn_hero_section', 'type' => $args['type']));
+        $wp_customize->add_control($id, array('label' => $args['label'], 'section' => 'gnn_hero_section', 'type' => $args['type']));
     }
 
     // =====================================================================
     // SETTINGS: General
     // =====================================================================
     $general_settings = array(
-        'logo_text'       => array('default' => 'GNN_ANTIGRAVITY', 'label' => 'Site Logo Text', 'type' => 'text'),
-        'show_post_title' => array('default' => true, 'label' => 'Show Titles', 'type' => 'checkbox'),
-        'show_post_date'  => array('default' => true, 'label' => 'Show Dates', 'type' => 'checkbox'),
-        'show_post_author'=> array('default' => false, 'label' => 'Show Author', 'type' => 'checkbox'),
+        'logo_text'       => array('default' => 'GNN_ANTIGRAVITY', 'label' => esc_html__('Site Logo Text', 'gnn-antigravity'), 'type' => 'text'),
+        'show_post_title' => array('default' => true, 'label' => esc_html__('Show Titles', 'gnn-antigravity'), 'type' => 'checkbox'),
+        'show_post_date'  => array('default' => true, 'label' => esc_html__('Show Dates', 'gnn-antigravity'), 'type' => 'checkbox'),
+        'show_post_author'=> array('default' => false, 'label' => esc_html__('Show Author', 'gnn-antigravity'), 'type' => 'checkbox'),
     );
     foreach ($general_settings as $id => $args) {
         $sanitize = ($args['type'] === 'checkbox') ? 'gnn_sanitize_checkbox' : 'sanitize_text_field';
         $wp_customize->add_setting($id, array('default' => $args['default'], 'sanitize_callback' => $sanitize));
-        $wp_customize->add_control($id, array('label' => esc_html__($args['label'], 'gnn-antigravity'), 'section' => 'gnn_settings', 'type' => $args['type']));
+        $wp_customize->add_control($id, array('label' => $args['label'], 'section' => 'gnn_settings', 'type' => $args['type']));
     }
 
     // =====================================================================
@@ -324,7 +324,7 @@ function gnn_antigravity_customize_register($wp_customize)
             'Space Grotesk'  => 'Space Grotesk',
             'JetBrains Mono' => 'JetBrains Mono',
             'Outfit'         => 'Outfit',
-            'system-ui'      => 'System Default',
+            'system-ui'      => esc_html__('System Default', 'gnn-antigravity'),
         ),
     ));
 
@@ -340,7 +340,7 @@ function gnn_antigravity_customize_register($wp_customize)
         'section'     => 'gnn_typography',
         'type'        => 'select',
         'choices'     => array(
-            ''               => '— Same as Primary —',
+            ''               => esc_html__('— Same as Primary —', 'gnn-antigravity'),
             'Inter'          => 'Inter',
             'Roboto'         => 'Roboto',
             'Montserrat'     => 'Montserrat',
@@ -384,7 +384,7 @@ function gnn_antigravity_customize_register($wp_customize)
         'label'   => esc_html__('Header Positioning', 'gnn-antigravity'),
         'section' => 'gnn_header',
         'type'    => 'select',
-        'choices' => array('fixed' => 'Sticky', 'absolute' => 'Normal'),
+        'choices' => array('fixed' => esc_html__('Sticky', 'gnn-antigravity'), 'absolute' => esc_html__('Normal', 'gnn-antigravity')),
     ));
 
     $wp_customize->add_setting('header_bg_type', array('default' => 'transparent', 'sanitize_callback' => 'sanitize_text_field'));
@@ -392,7 +392,7 @@ function gnn_antigravity_customize_register($wp_customize)
         'label'   => esc_html__('Header Background Style', 'gnn-antigravity'),
         'section' => 'gnn_header',
         'type'    => 'radio',
-        'choices' => array('transparent' => 'Transparent', 'colored' => 'Solid'),
+        'choices' => array('transparent' => esc_html__('Transparent', 'gnn-antigravity'), 'colored' => esc_html__('Solid', 'gnn-antigravity')),
     ));
 
     $wp_customize->add_setting('enable_mobile_menu', array('default' => true, 'sanitize_callback' => 'gnn_sanitize_checkbox'));
@@ -425,7 +425,7 @@ function gnn_antigravity_customize_register($wp_customize)
         'label'   => esc_html__('Footer Background Style', 'gnn-antigravity'),
         'section' => 'gnn_footer',
         'type'    => 'radio',
-        'choices' => array('transparent' => 'Transparent', 'colored' => 'Solid'),
+        'choices' => array('transparent' => esc_html__('Transparent', 'gnn-antigravity'), 'colored' => esc_html__('Solid', 'gnn-antigravity')),
     ));
 
     $wp_customize->add_setting('copyright_url', array('default' => 'https://gnn.tr', 'sanitize_callback' => 'esc_url_raw'));
@@ -467,14 +467,14 @@ function gnn_antigravity_customize_register($wp_customize)
     // COLORS (shared across Header/Footer)
     // =====================================================================
     $colors = array(
-        'header_bg_color' => array('label' => 'Header Background Color', 'section' => 'gnn_header', 'default' => '#000000'),
-        'footer_bg_color' => array('label' => 'Footer Background Color', 'section' => 'gnn_footer', 'default' => '#000000'),
-        'accent_color'    => array('label' => 'Accent Color', 'section' => 'gnn_settings', 'default' => '#00f2ff'),
+        'header_bg_color' => array('label' => esc_html__('Header Background Color', 'gnn-antigravity'), 'section' => 'gnn_header', 'default' => '#000000'),
+        'footer_bg_color' => array('label' => esc_html__('Footer Background Color', 'gnn-antigravity'), 'section' => 'gnn_footer', 'default' => '#000000'),
+        'accent_color'    => array('label' => esc_html__('Accent Color', 'gnn-antigravity'), 'section' => 'gnn_settings', 'default' => '#00f2ff'),
     );
     foreach ($colors as $id => $args) {
         $wp_customize->add_setting($id, array('default' => $args['default'], 'sanitize_callback' => 'sanitize_hex_color', 'transport' => 'postMessage'));
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $id, array(
-            'label'   => esc_html__($args['label'], 'gnn-antigravity'),
+            'label'   => $args['label'],
             'section' => $args['section'],
         )));
     }

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.6.1] - 2026-04-26
+### Changed
+- **Elementor Standards:** Removed theme-injected wrappers (`#elementor-canvas-content` and `#elementor-full-width-content`) from Elementor templates to strictly adhere to Standard 5.2.
+- **Critical CSS:** Expanded inline CSS in `header.php` to prevent Flash of Unstyled Content (FOUC) for key UI elements.
+- **Documentation:** Finalized PHPDoc blocks across all `inc/` files to comply with Standard 3.1.
+
+### Fixed
+- **Accessibility (A11Y):** Added skip-to-content link, explicit `:focus-visible` states, keyboard navigation for the Hero Slider, and accessible ARIA attributes/keyboard interactions for the mobile menu.
+- **Internationalization (I18N):** Localized all hardcoded strings and settings choices in the Customizer and template files.
+
 ## [1.6.0] - 2026-04-25
 ### Added
 - **Native Hero Slider:** A zero-dependency, GSAP-powered, and touch-enabled image/content slider fully manageable via the Customizer.

@@ -31,14 +31,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class( 'gnn-elementor-canvas' ); ?>>
     <?php wp_body_open(); ?>
 
-    <div id="elementor-canvas-content">
-        <?php
-        while ( have_posts() ) :
-            the_post();
-            the_content();
-        endwhile;
-        ?>
-    </div>
+    <?php
+    while ( have_posts() ) :
+        the_post();
+        the_content();
+    endwhile;
+    ?>
 
     <?php wp_footer(); ?>
 </body>

@@ -16,7 +16,7 @@
 
 
 <footer class="site-bottom-bar">
-    <nav class="corner-nav bottom-left">
+    <nav class="corner-nav bottom-left" aria-label="<?php esc_attr_e('Footer Menu', 'gnn-antigravity'); ?>">
         <?php
         wp_nav_menu(array(
             'theme_location' => 'footer-menu',

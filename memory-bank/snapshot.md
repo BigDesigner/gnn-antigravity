@@ -1,7 +1,7 @@
 # Project Snapshot
 
 ## System Status
-- **Theme Version:** 1.6.0
+- **Theme Version:** 1.6.1
 - **Current Branch:** main
 - **Remote:** https://github.com/BigDesigner/gnn-antigravity.git
 - **Core Principles:** Zero 3rd-party Dependency, 100% Native WP API focus
@@ -21,6 +21,8 @@
 - Multi-provider Bot Protection (Cloudflare Turnstile & Google reCAPTCHA v3)
 - Back-to-top button (optional via Customizer)
 - Standardized `CHANGELOG.md` tracking
+- Advanced Performance Optimization (PERF-001: Defer, Preconnect, Cache-busting)
+- Custom Magnetic Cursor (UI-002)
 
 ## Module Map (`inc/`)
 | Module | Responsibility |
@@ -36,8 +38,9 @@
 
 
 ## Planned Integrations
-- Advanced Performance Optimization (PERF-001)
-- Accessibility (A11Y) & Internationalization (I18N) Audit
+- Accessibility (A11Y) & Internationalization (I18N) Audit (Completed in v1.6.1)
+- Elementor Template Optimization (Completed in v1.6.1)
+- Live Production Testing
 
 
 ## Environment

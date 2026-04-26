@@ -19,14 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<div id="elementor-full-width-content" class="elementor-full-width-wrapper">
-    <?php
-    while ( have_posts() ) :
-        the_post();
-        the_content();
-    endwhile;
-    ?>
-</div>
+<?php
+while ( have_posts() ) :
+    the_post();
+    the_content();
+endwhile;
+?>
 
 <?php
 get_footer();

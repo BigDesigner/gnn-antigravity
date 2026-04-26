@@ -28,5 +28,5 @@
 ## Backlog
 - [x] PERF-001: Implement asset optimization (minification, critical CSS).
 - [x] UI-002: Implement Custom Magnetic Cursor via GSAP.
-- [ ] A11Y-001: Accessibility audit and improvements.
-- [ ] I18N-001: Translation-readiness audit and .pot file generation.
+- [x] A11Y-001: Accessibility audit and improvements.
+- [x] I18N-001: Translation-readiness audit and .pot file generation.

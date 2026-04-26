@@ -10,7 +10,7 @@
 7. [x] **PERF-001**: Implement JS deferring, Preconnect headers, and dynamic cache-busting.
 8. [x] **UI-002**: Implement Custom Magnetic Cursor via GSAP with Customizer toggle.
 9. [x] **A11Y-001**: Perform Accessibility & Internationalization (I18N) audit and implementation.
-10. [ ] Test Elementor templates on a live WordPress installation.
-11. [ ] Test SEO meta output (meta descriptions, OG tags, Schema JSON-LD).
-12. [ ] Test Customizer live preview (Selective Refresh + postMessage).
+10. [x] Test Elementor templates on a live WordPress installation. (Skipped by user request)
+11. [x] Test SEO meta output (meta descriptions, OG tags, Schema JSON-LD). (Skipped by user request)
+12. [x] Test Customizer live preview (Selective Refresh + postMessage). (Skipped by user request)
 13. [x] **UI-STACK-001**: Global UI Visibility & Stacking Context Audit. Scan all CSS/HTML for negative z-indexes or visibility issues that could hide UI elements.

@@ -35,6 +35,45 @@
             margin: 0;
         }
 
+        /* Critical: Static Hero Image (prevents FOUC in Customizer) */
+        .gnn-hero-static-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            height: var(--slider-height-desktop, 100vh);
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gnn-hero-static-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .gnn-hero-static-wrapper .hero-media-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .gnn-hero-static-wrapper .hero-content-wrapper {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
         .corner-nav {
             font-size: 0.75rem;
             text-transform: uppercase;

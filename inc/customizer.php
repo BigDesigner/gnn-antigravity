@@ -278,6 +278,33 @@ function gnn_antigravity_customize_register($wp_customize)
     // SETTINGS: Hero
     // =====================================================================
 
+    // -- Static Hero Image (shown when slider is disabled)
+    $wp_customize->add_setting('hero_static_image', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'hero_static_image', array(
+        'label'       => esc_html__('Static Hero Image', 'gnn-antigravity'),
+        'description' => esc_html__('Displayed as a full-width hero when the slider is disabled. Leave empty to use default hero background.', 'gnn-antigravity'),
+        'section'     => 'gnn_hero_section',
+        'priority'    => 5,
+    )));
+
+    // -- Static Hero Overlay Opacity
+    $wp_customize->add_setting('hero_static_overlay_opacity', array(
+        'default'           => '0.4',
+        'sanitize_callback' => 'gnn_sanitize_float',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('hero_static_overlay_opacity', array(
+        'label'       => esc_html__('Hero Overlay Opacity', 'gnn-antigravity'),
+        'description' => esc_html__('Controls the dark overlay on the static hero image (0 = transparent, 1 = fully dark).', 'gnn-antigravity'),
+        'section'     => 'gnn_hero_section',
+        'type'        => 'number',
+        'priority'    => 6,
+        'input_attrs' => array('min' => 0, 'max' => 1, 'step' => 0.05),
+    ));
+
     $hero_settings = array(
         'hero_title'    => array('default' => esc_html__('Build the new way.', 'gnn-antigravity'), 'label' => esc_html__('Hero Title', 'gnn-antigravity'), 'type' => 'text'),
         'hero_subtitle' => array('default' => esc_html__('Experimental workspace for agentic development.', 'gnn-antigravity'), 'label' => esc_html__('Hero Subtitle', 'gnn-antigravity'), 'type' => 'textarea'),

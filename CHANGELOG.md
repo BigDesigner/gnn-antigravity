@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.7.1] - 2026-04-26
+### Added
+- **Static Hero Image:** New Customizer setting (`hero_static_image`) under Hero Section that allows uploading a full-width static background image for the front page when the Hero Slider is disabled. Uses the same height dimensions as the slider (`--slider-height-desktop` / `--slider-height-mobile`). If no image is uploaded, the existing default hero behaviour (background + text) is preserved.
+- **Hero Overlay Opacity Control:** New `hero_static_overlay_opacity` setting in Customizer to fine-tune the dark overlay on the static hero image.
+
 ## [1.7.0] - 2026-04-26
 ### Added
 - **Standard WordPress Templates:** Completed the official WordPress template hierarchy by adding `single.php`, `archive.php`, `search.php`, `404.php`, and `comments.php`. All new templates are fully integrated with the glassmorphism/canvas design system and Swup page transitions.

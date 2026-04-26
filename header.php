@@ -182,6 +182,24 @@
                 <?php endif; ?>
             </div>
 
+        <?php elseif (is_front_page() && get_theme_mod('hero_static_image')):
+            // Static Hero Image — shown on front page when slider is disabled and an image is uploaded
+            $static_img = get_theme_mod('hero_static_image');
+            $overlay_opacity = floatval(get_theme_mod('hero_static_overlay_opacity', 0.4));
+            ?>
+            <div class="gnn-hero-static-wrapper" aria-label="<?php esc_attr_e('Hero Image', 'gnn-antigravity'); ?>">
+                <div class="gnn-hero-static-bg" style="background-image: url('<?php echo esc_url($static_img); ?>');"></div>
+                <div class="hero-media-overlay" style="opacity: <?php echo esc_attr($overlay_opacity); ?>;"></div>
+                <div class="hero-content-wrapper">
+                    <h1 class="hero-title">
+                        <?php echo esc_html(get_theme_mod('hero_title', 'Build the new way.')); ?>
+                    </h1>
+                    <p class="hero-subtitle">
+                        <?php echo esc_html(get_theme_mod('hero_subtitle', 'Experimental workspace for agentic development.')); ?>
+                    </p>
+                </div>
+            </div>
+
         <?php elseif ($hero_type !== 'hidden'): ?>
             <div class="hero-container drift <?php echo 'hero-' . esc_attr($hero_type); ?>">
                 <!-- Static Hero Logic -->

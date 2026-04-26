@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.6.2] - 2026-04-26
+### Added
+- **UI Stacking Audit:** Performed a global audit of stacking contexts (`UI-STACK-001`). 
+
+### Changed
+- **Stacking Order:** Boosted custom cursor `z-index` to maximum (`2147483647`) to ensure it stays on top of all UI elements including 3rd-party popups.
+- **Visual clipping:** Added `overflow: hidden` to Hero slides to prevent Ken Burns zoom effects from bleeding out during transitions.
+
+### Fixed
+- **Hero Slider Visibility:** Fixed an issue where Hero Slider background images were hidden behind the wrapper background due to negative `z-index` stacking. Re-ordered layers to use positive stacking context: Slide BG (1) < Overlay (2) < Content (3).
+
 ## [1.6.1] - 2026-04-26
 ### Changed
 - **Elementor Standards:** Removed theme-injected wrappers (`#elementor-canvas-content` and `#elementor-full-width-content`) from Elementor templates to strictly adhere to Standard 5.2.

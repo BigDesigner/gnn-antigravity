@@ -29,3 +29,4 @@
 | 2026-04-26 | ELM-004 | Removed theme-forced wrappers from Elementor templates (Standard 5.2) | Code review |
 | 2026-04-26 | DOC-001 | Finalized PHPDoc blocks across all inc/ files for production standards | Code review |
 | 2026-04-26 | PERF-002 | Expanded Critical CSS in header to prevent FOUC for primary UI elements | Manual verification |
+| 2026-04-26 | UI-STACK-001 | Global UI Stacking & Visibility Audit: Fixed negative z-indexes and boosted cursor depth | Code review & Grep audit |

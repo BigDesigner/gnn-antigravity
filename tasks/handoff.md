@@ -1,7 +1,7 @@
 # Session Handoff
 
 ## Summary
-Sprint 3 and Production Polish completed. Theme version bumped to 1.6.1. Implemented Accessibility (A11Y) features, I18N localization, Elementor template cleanup, and finalized PHPDoc standards.
+Sprint 3 and UI Stacking Audit completed. Theme version bumped to 1.6.2.
 
 ## Completed This Session
 - **A11Y-001:** ✅ Full A11Y audit — Skip-link, `:focus-visible`, Accessible Hamburger menu (aria-expanded, keyboard control), Keyboard-navigable Hero Slider.
@@ -9,7 +9,8 @@ Sprint 3 and Production Polish completed. Theme version bumped to 1.6.1. Impleme
 - **ELM-004:** ✅ Elementor Templates — Removed theme-forced wrappers to comply with Standard 5.2.
 - **DOC-001:** ✅ Documentation — Finalized PHPDoc blocks across all `inc/` files.
 - **PERF-002:** ✅ Critical CSS — Expanded inline header styles to prevent FOUC for primary UI elements.
-- **AUDIT:** ✅ Security & Architecture Audit v1.6.1 completed.
+- **AUDIT:** ✅ Security, Architecture, A11Y, I18N, and UI Stacking Audits v1.6.2 completed.
+- **UI-STACK-001:** ✅ Fixed Hero Slider visibility and boosted global stacking contexts.
 
 ## Files Created/Modified
 | File | Action |
@@ -21,7 +22,7 @@ Sprint 3 and Production Polish completed. Theme version bumped to 1.6.1. Impleme
 | `assets/js/main.js` | Updated — Added Slider, Nav, and Cursor logic |
 | `assets/css/main.css` | Updated — Added Slider and UI styles |
 | `header.php` | Updated — Integrated Slider and Nav classes |
-| `style.css` | Updated — Version 1.6.0 |
+| `style.css` | Updated — Version 1.6.2 |
 
 ## Next Session Focus
-Deployment and Live Testing. Push version 1.6.1 to a production environment and verify Elementor rendering and SEO output.
+Deployment and Live Testing. Push version 1.6.2 to a production environment.

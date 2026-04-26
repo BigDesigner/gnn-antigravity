@@ -135,7 +135,7 @@ a:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -2;
+    z-index: 1;
 }
 
 .hero-video-bg iframe {
@@ -173,12 +173,12 @@ a:hover {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    z-index: 2;
 }
 
 .hero-content-wrapper {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     max-width: 1200px;
 }
 
@@ -236,6 +236,7 @@ a:hover {
     visibility: hidden;
     z-index: 1;
     transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    overflow: hidden;
 }
 
 .gnn-slide.is-active {
@@ -252,7 +253,7 @@ a:hover {
     height: 100%;
     background-size: cover;
     background-position: center;
-    z-index: -2;
+    z-index: 1;
     transform: scale(1.1); /* Default scale for Ken Burns start */
     transition: transform 8s linear;
 }
@@ -851,7 +852,7 @@ html.is-animating .transition-fade {
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 99999;
+    z-index: 2147483647; /* Maximum possible z-index to ensure it stays on top of everything */
     border-radius: 50%;
     transform: translate(-50%, -50%);
     display: none; /* Hidden by default, shown by JS on mousemove */

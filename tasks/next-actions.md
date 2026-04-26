@@ -13,3 +13,4 @@
 10. [ ] Test Elementor templates on a live WordPress installation.
 11. [ ] Test SEO meta output (meta descriptions, OG tags, Schema JSON-LD).
 12. [ ] Test Customizer live preview (Selective Refresh + postMessage).
+13. [x] **UI-STACK-001**: Global UI Visibility & Stacking Context Audit. Scan all CSS/HTML for negative z-indexes or visibility issues that could hide UI elements.

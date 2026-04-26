@@ -49,3 +49,16 @@
 - **Decision:** Implement a state-based header that gains a `.is-scrolled` class via JS.
 - **Rationale:** Enhances visual depth and "premium" feel. Using `backdrop-filter` with fallback ensures modern browsers get the best experience while maintaining readability.
 - **Consequences:** Subtle, modern UI improvement that signals system state to the user.
+
+## [ADR-009] Self-hosted GitHub Auto-Updater
+- **Status:** Accepted
+- **Context:** Theme is distributed via GitHub, not wordpress.org. Users need a way to receive update notifications and one-click updates from WP Admin.
+- **Decision:** Built a native `GNN_GitHub_Updater` class in `inc/updater.php` that hooks into `pre_set_site_transient_update_themes` to poll the GitHub Releases API. Results are cached via WP transients (12 hours). An admin page under Appearance > Theme Updates provides a manual "Check Now" button. A Customizer toggle (`enable_github_updates`) allows disabling the feature entirely.
+- **Rationale:** Maintains "Zero 3rd-party dependency" principle. Avoids requiring plugins like "GitHub Updater". Public GitHub API is free with generous rate limits.
+- **Consequences:** Users get wordpress.org-like update UX for a self-hosted theme. Zero cost, zero plugin overhead.
+
+## [ADR-010] Static Hero Image with Slider Dimension Reuse
+- **Status:** Accepted
+- **Context:** When the Hero Slider is disabled, users wanted an option to display a full-width static background image instead of a plain text hero.
+- **Decision:** Added a `hero_static_image` Customizer setting (WP_Customize_Image_Control) and `hero_static_overlay_opacity` control. The static hero wrapper reuses the slider's CSS height variables (`--slider-height-desktop` / `--slider-height-mobile`) for identical dimensions. If no image is uploaded, the existing default hero (background + text) is preserved.
+- **Consequences:** Single set of height controls for both slider and static hero. Clean fallback chain: Slider ON → Slider, Slider OFF + Image → Static Hero, Slider OFF + No Image → Default Hero.

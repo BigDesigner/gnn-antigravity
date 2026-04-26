@@ -23,6 +23,8 @@
 - Standardized `CHANGELOG.md` tracking
 - Advanced Performance Optimization (PERF-001: Defer, Preconnect, Cache-busting)
 - Custom Magnetic Cursor (UI-002)
+- Static Hero Image (optional, Customizer-controlled, shares slider dimensions)
+- Self-hosted GitHub Auto-Updater (with admin panel, manual check, and Customizer toggle)
 
 ## Module Map (`inc/`)
 | Module | Responsibility |

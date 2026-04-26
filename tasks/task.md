@@ -38,5 +38,12 @@
 - [x] UPD-004: Verify sanitization, escaping, error handling. → **PASS**
 - [x] DOC-001: Bump version → 1.8.0, CHANGELOG, snapshot. → **PASS**
 
+## Sprint v1.8.1 — Update Control Panel ✅ PASS
+- [x] UPD-005: Add Customizer toggle (`enable_github_updates`) to enable/disable auto-updates. → **PASS**
+- [x] UPD-006: Create admin page (Appearance > Theme Updates) with status dashboard. → **PASS**
+- [x] UPD-007: Implement "Check for Updates Now" button with nonce protection. → **PASS**
+- [x] UPD-008: Verify all new admin output is escaped and nonce-protected. → **PASS**
+- [x] DOC-002: Bump version → 1.8.1, CHANGELOG, snapshot. → **PASS**
+
 ## Backlog
 - (empty)

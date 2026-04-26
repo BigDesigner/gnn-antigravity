@@ -1,8 +1,8 @@
-# Next Atomic Actions — v1.8.0 GitHub Auto-Updater
+# Next Atomic Actions — v1.8.1 Update Control Panel
 
 ## Steps — ALL COMPLETED ✅
-1. [x] **UPD-001**: Create `inc/updater.php` — GNN_GitHub_Updater class. → **PASS**
-2. [x] **UPD-002**: Register `inc/updater.php` in `functions.php` module loader. → **PASS**
-3. [x] **UPD-003**: Update `release.yml` rsync excludes to exclude `archive/`. → **PASS**
-4. [x] **UPD-004**: Verify sanitization, escaping, error handling. → **PASS** (wp_remote_get error handling, esc_html, sanitize_text_field, transient caching)
-5. [x] **DOC-001**: Bump `style.css` to `1.8.0`, CHANGELOG, snapshot, task.md. → **PASS**
+1. [x] **UPD-005**: Add `enable_github_updates` Customizer toggle. → **PASS**
+2. [x] **UPD-006**: Create admin page (Appearance > Theme Updates) with version status dashboard. → **PASS**
+3. [x] **UPD-007**: Implement "Check for Updates Now" button with nonce security. → **PASS**
+4. [x] **UPD-008**: Verify all admin output is escaped and nonce-protected. → **PASS**
+5. [x] **DOC-002**: Bump `style.css` to `1.8.1`, CHANGELOG, snapshot, task.md, README.md. → **PASS**

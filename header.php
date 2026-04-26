@@ -47,6 +47,36 @@
         }
         #mobile-menu-overlay.is-active { display: flex; opacity: 1; }
 
+        /* Critical: Hamburger */
+        #hamburger-menu {
+            width: 44px; height: 44px;
+            display: none; /* JS shows it */
+            position: relative;
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            cursor: pointer;
+            outline: none !important;
+            box-shadow: none !important;
+            appearance: none;
+            -webkit-appearance: none;
+            color: var(--fg, #fff);
+        }
+        #hamburger-menu span {
+            display: block;
+            width: 25px; height: 2px;
+            background: currentColor;
+            position: absolute;
+            left: 50%; top: 50%;
+            margin-left: -12.5px;
+            margin-top: -1px;
+            transition: all 0.3s ease;
+        }
+        #hamburger-menu span:first-child { transform: translateY(-5px); }
+        #hamburger-menu span:last-child { transform: translateY(5px); }
+        #hamburger-menu.is-active span:first-child { transform: translateY(0) rotate(45deg); }
+        #hamburger-menu.is-active span:last-child { transform: translateY(0) rotate(-45deg); }
+
         .hero-title {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 700;

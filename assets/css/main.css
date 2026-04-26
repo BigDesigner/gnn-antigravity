@@ -566,19 +566,23 @@ html.is-animating .transition-fade {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: transparent;
-    border: none;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+    color: var(--fg, #fff);
 }
 
 #hamburger-menu span {
     display: block;
     width: 25px;
     height: 2px;
-    background: var(--fg);
+    background: currentColor;
     position: absolute;
     transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     pointer-events: none;
-    /* Let parent handle click */
 }
 
 #hamburger-menu span:first-child {

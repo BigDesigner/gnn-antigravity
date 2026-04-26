@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.8.5] - 2026-04-26
+### Fixed
+- **Hamburger Menu:** Removed browser default button styles (background, border, box-shadow) that appeared after switching to `<button>` element.
+- **Visuals:** Hamburger lines now use `currentColor` to perfectly match the site's menu/foreground color (`--fg`).
+- **Critical CSS:** Added hamburger specific critical styles to `header.php` to prevent unstyled flashes.
+
 ## [1.8.4] - 2026-04-26
 ### Improved
 - **Menu System Audit:** Comprehensive overhaul of header and footer navigation for maximum responsiveness and accessibility.

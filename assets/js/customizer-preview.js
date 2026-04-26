@@ -69,4 +69,50 @@
         });
     });
 
+    // --- Hero / Slider Height ---
+    wp.customize('hero_height_desktop', function (value) {
+        value.bind(function (newval) {
+            document.documentElement.style.setProperty('--slider-height-desktop', newval + 'vh');
+        });
+    });
+
+    wp.customize('hero_height_mobile', function (value) {
+        value.bind(function (newval) {
+            document.documentElement.style.setProperty('--slider-height-mobile', newval + 'vh');
+        });
+    });
+
+    // Legacy slider height controls (sync to same CSS variables)
+    wp.customize('slider_height_desktop', function (value) {
+        value.bind(function (newval) {
+            document.documentElement.style.setProperty('--slider-height-desktop', newval + 'vh');
+        });
+    });
+
+    wp.customize('slider_height_mobile', function (value) {
+        value.bind(function (newval) {
+            document.documentElement.style.setProperty('--slider-height-mobile', newval + 'vh');
+        });
+    });
+
+    // --- Static Hero Overlay Opacity ---
+    wp.customize('hero_static_overlay_opacity', function (value) {
+        value.bind(function (newval) {
+            var overlay = document.querySelector('.gnn-hero-static-wrapper .hero-media-overlay');
+            if (overlay) {
+                overlay.style.opacity = newval;
+            }
+        });
+    });
+
+    // --- Static Hero Image (live swap without full refresh) ---
+    wp.customize('hero_static_image', function (value) {
+        value.bind(function (newval) {
+            var bg = document.querySelector('.gnn-hero-static-bg');
+            if (bg) {
+                bg.style.backgroundImage = newval ? "url('" + newval + "')" : 'none';
+            }
+        });
+    });
+
 })(jQuery);

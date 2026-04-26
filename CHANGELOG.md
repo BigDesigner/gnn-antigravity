@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.8.3] - 2026-04-26
+### Fixed
+- **Customizer Preview:** Fixed static hero image, overlay opacity, and hero/slider height not updating in the Customizer live preview. Added missing `postMessage` handlers in `customizer-preview.js` for `hero_height_desktop`, `hero_height_mobile`, `slider_height_desktop`, `slider_height_mobile`, `hero_static_overlay_opacity`, and `hero_static_image`.
+- **Selective Refresh:** Added a `hero_static_image` Selective Refresh partial so the hero area re-renders server-side when the image is first selected (since the HTML block doesn't exist until an image is set).
+
 ## [1.8.2] - 2026-04-26
 ### Fixed
 - **Static Hero Image:** Fixed front page detection to use `is_front_page() || is_home()`, ensuring the static hero renders correctly in all WordPress homepage configurations (static page, blog posts, or both).

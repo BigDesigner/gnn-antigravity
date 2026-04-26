@@ -690,6 +690,14 @@ function gnn_customizer_selective_refresh($wp_customize)
             return esc_html(get_theme_mod('hero_subtitle', 'Experimental workspace for agentic development.'));
         },
     ));
+
+    // Static Hero Image — triggers a partial refresh of the hero area
+    // This is needed because the HTML structure changes (hero-container ↔ gnn-hero-static-wrapper)
+    $wp_customize->selective_refresh->add_partial('hero_static_image', array(
+        'selector'            => '.gnn-hero-static-wrapper, .hero-container',
+        'container_inclusive' => true,
+        'fallback_refresh'    => true,
+    ));
 }
 add_action('customize_register', 'gnn_customizer_selective_refresh');
 

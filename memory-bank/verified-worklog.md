@@ -30,3 +30,6 @@
 | 2026-04-26 | DOC-001 | Finalized PHPDoc blocks across all inc/ files for production standards | Code review |
 | 2026-04-26 | PERF-002 | Expanded Critical CSS in header to prevent FOUC for primary UI elements | Manual verification |
 | 2026-04-26 | UI-STACK-001 | Global UI Stacking & Visibility Audit: Fixed negative z-indexes and boosted cursor depth | Code review & Grep audit |
+| 2026-04-26 | ENV-001 | Set up zero-config testing environment with wp-now and Playwright | Environment initialization |
+| 2026-04-26 | BUG-001 | Fixed slider 0px height issue by migrating PHP logic out of main.css into inline customizer CSS | Playwright screenshot verification |
+| 2026-04-26 | ENV-002 | Cleaned up testing artifacts (wp-now/Playwright files) from worktree for production distribution | File deletion |

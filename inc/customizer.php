@@ -519,7 +519,9 @@ function gnn_customizer_dynamic_css()
     $base_size      = absint(get_theme_mod('gnn_base_font_size', 16));
     $letter_spacing = floatval(get_theme_mod('gnn_letter_spacing', 0.15));
     $accent_color   = get_theme_mod('accent_color', '#00f2ff');
-    $header_height  = absint(get_theme_mod('header_height', 80));
+    $header_height    = absint(get_theme_mod('header_height', 80));
+    $slider_h_desktop = absint(get_theme_mod('slider_height_desktop', 100));
+    $slider_h_mobile  = absint(get_theme_mod('slider_height_mobile', 70));
 
     $heading_stack = ! empty($heading_font) ? esc_attr($heading_font) : esc_attr($font_family);
 
@@ -531,6 +533,8 @@ function gnn_customizer_dynamic_css()
             --tracking: %sem;
             --accent-color: %s;
             --header-height: %dpx;
+            --slider-height-desktop: %dvh;
+            --slider-height-mobile: %dvh;
         }
         body { font-size: var(--base-size); }
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }',
@@ -539,7 +543,9 @@ function gnn_customizer_dynamic_css()
         $base_size,
         esc_attr($letter_spacing),
         esc_attr($accent_color),
-        $header_height
+        $header_height,
+        $slider_h_desktop,
+        $slider_h_mobile
     );
 
     wp_add_inline_style('gnn-antigravity-main', $css);

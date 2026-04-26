@@ -202,9 +202,10 @@ a:hover {
 /* ==========================================================================
    Hero Slider (CUST-002)
    ========================================================================== */
+/* Variable heights are now injected via wp_add_inline_style in functions.php */
 :root {
-    --slider-height-desktop: <?php echo esc_attr(get_theme_mod('slider_height_desktop', 100)); ?>vh;
-    --slider-height-mobile: <?php echo esc_attr(get_theme_mod('slider_height_mobile', 70)); ?>vh;
+    --slider-height-desktop: 100vh;
+    --slider-height-mobile: 70vh;
 }
 
 .gnn-hero-slider-wrapper {

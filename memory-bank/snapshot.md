@@ -1,7 +1,7 @@
 # Project Snapshot
 
 ## System Status
-- **Theme Version:** 1.7.1
+- **Theme Version:** 1.8.0
 - **Current Branch:** main
 - **Remote:** https://github.com/BigDesigner/gnn-antigravity.git
 - **Core Principles:** Zero 3rd-party Dependency, 100% Native WP API focus
@@ -35,6 +35,7 @@
 | `seo.php` | Meta descriptions, OG, Twitter, Schema, SEO metabox |
 | `security.php` | Cloudflare Turnstile integration |
 | `analytics.php` | Google Analytics (GA4) with custom UI event tracking |
+| `updater.php` | Self-hosted GitHub theme auto-updater |
 
 
 ## Production Ready

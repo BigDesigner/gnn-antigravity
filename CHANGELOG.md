@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.8.0] - 2026-04-26
+### Added
+- **GitHub Auto-Updater:** New `inc/updater.php` module that integrates with WordPress's native update system. Checks GitHub Releases API for new versions (with 12-hour caching), shows update notifications in the WP Admin dashboard, and handles theme folder renaming after extraction. No 3rd-party plugin required.
+- **Release Workflow:** Added `archive/` to the rsync exclude list in GitHub Actions release workflow.
+
 ## [1.7.1] - 2026-04-26
 ### Added
 - **Static Hero Image:** New Customizer setting (`hero_static_image`) under Hero Section that allows uploading a full-width static background image for the front page when the Hero Slider is disabled. Uses the same height dimensions as the slider (`--slider-height-desktop` / `--slider-height-mobile`). If no image is uploaded, the existing default hero behaviour (background + text) is preserved.

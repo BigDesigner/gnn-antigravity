@@ -87,6 +87,7 @@ require get_template_directory() . '/inc/elementor-compat.php';
 require get_template_directory() . '/inc/seo.php';
 require get_template_directory() . '/inc/security.php';
 require get_template_directory() . '/inc/analytics.php';
+require get_template_directory() . '/inc/updater.php';
 
 /**
  * Custom Block registration logic can stay here or move to inc/blocks.php if it grows.

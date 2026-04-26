@@ -1,8 +1,8 @@
-# Next Atomic Actions — v1.7.1 Static Hero Image
+# Next Atomic Actions — v1.8.0 GitHub Auto-Updater
 
 ## Steps — ALL COMPLETED ✅
-1. [x] **HERO-001**: Register `hero_static_image` setting + `WP_Customize_Image_Control` in `inc/customizer.php` → `gnn_hero_section`. → **PASS**
-2. [x] **HERO-002**: Update `header.php` hero rendering logic. → **PASS**
-3. [x] **HERO-003**: Add `.gnn-hero-static-wrapper` CSS to `assets/css/main.css`. → **PASS**
-4. [x] **HERO-004**: PHPDoc, `esc_url()`, `sanitize_callback`, `esc_attr_e()` verification pass. → **PASS**
-5. [x] **DOC-001**: Bump `style.css` to `1.7.1`, add CHANGELOG entry, update `snapshot.md`. → **PASS**
+1. [x] **UPD-001**: Create `inc/updater.php` — GNN_GitHub_Updater class. → **PASS**
+2. [x] **UPD-002**: Register `inc/updater.php` in `functions.php` module loader. → **PASS**
+3. [x] **UPD-003**: Update `release.yml` rsync excludes to exclude `archive/`. → **PASS**
+4. [x] **UPD-004**: Verify sanitization, escaping, error handling. → **PASS** (wp_remote_get error handling, esc_html, sanitize_text_field, transient caching)
+5. [x] **DOC-001**: Bump `style.css` to `1.8.0`, CHANGELOG, snapshot, task.md. → **PASS**

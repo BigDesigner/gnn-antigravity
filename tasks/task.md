@@ -25,11 +25,18 @@
 - [x] TMPL-001: Complete WordPress template hierarchy (single, archive, search, 404, comments).
 
 ## Sprint v1.7.1 — Static Hero Image ✅ PASS
-- [x] HERO-001: Add Static Hero Image support to Customizer. → **PASS** (sanitize_callback: `esc_url_raw`)
-- [x] HERO-002: Implement static hero image rendering in `header.php`. → **PASS** (esc_url, esc_attr, esc_html, esc_attr_e verified)
-- [x] HERO-003: Add `.gnn-hero-static-wrapper` CSS reusing slider height variables. → **PASS** (responsive mobile breakpoint included)
-- [x] HERO-004: Verify sanitization, escaping, i18n compliance. → **PASS** (all new strings localized, all output escaped)
-- [x] DOC-001: Update CHANGELOG.md, style.css version → 1.7.1, snapshot.md. → **PASS**
+- [x] HERO-001: Add Static Hero Image support to Customizer. → **PASS**
+- [x] HERO-002: Implement static hero image rendering in `header.php`. → **PASS**
+- [x] HERO-003: Add `.gnn-hero-static-wrapper` CSS. → **PASS**
+- [x] HERO-004: Verify sanitization, escaping, i18n compliance. → **PASS**
+- [x] DOC-001: Update CHANGELOG.md, style.css → 1.7.1, snapshot.md. → **PASS**
+
+## Sprint v1.8.0 — GitHub Auto-Updater ✅ PASS
+- [x] UPD-001: Create `inc/updater.php` — GNN_GitHub_Updater class. → **PASS**
+- [x] UPD-002: Register module in `functions.php`. → **PASS**
+- [x] UPD-003: Update `release.yml` rsync excludes. → **PASS**
+- [x] UPD-004: Verify sanitization, escaping, error handling. → **PASS**
+- [x] DOC-001: Bump version → 1.8.0, CHANGELOG, snapshot. → **PASS**
 
 ## Backlog
 - (empty)

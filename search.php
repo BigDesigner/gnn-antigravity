@@ -14,7 +14,7 @@ get_header();
             <h1 class="page-title glitch" data-text="<?php echo esc_attr(sprintf(__('Search Results for: %s', 'gnn-antigravity'), get_search_query())); ?>">
                 <?php
                 /* translators: %s: search query. */
-                printf(esc_html__('Search Results for: %s', 'gnn-antigravity'), '<span>' . get_search_query() . '</span>');
+                printf(esc_html__('Search Results for: %s', 'gnn-antigravity'), '<span>' . esc_html(get_search_query()) . '</span>');
                 ?>
             </h1>
         </header>

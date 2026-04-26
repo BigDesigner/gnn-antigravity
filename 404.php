@@ -24,7 +24,7 @@ get_header();
             <?php get_search_form(); ?>
             
             <div style="margin-top: 3rem;">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="gnn-button" style="padding: 1rem 2rem; background: var(--primary-color, #fff); color: var(--bg-color, #000); text-decoration: none; border-radius: 4px; font-weight: bold;">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="gnn-btn" style="display: inline-block; text-decoration: none;">
                     <?php esc_html_e('Return Home', 'gnn-antigravity'); ?>
                 </a>
             </div>

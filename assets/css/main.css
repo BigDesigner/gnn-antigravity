@@ -211,7 +211,8 @@ a:hover {
 .gnn-hero-slider-wrapper {
     position: relative;
     width: 100%;
-    height: var(--slider-height-desktop);
+    min-height: 100vh;
+    height: var(--slider-height-desktop, 100vh);
     overflow: hidden;
     background: #000;
 }
@@ -320,7 +321,8 @@ a:hover {
 
 @media screen and (max-width: 768px) {
     .gnn-hero-slider-wrapper {
-        height: var(--slider-height-mobile);
+        min-height: 70vh;
+        height: var(--slider-height-mobile, 70vh);
     }
     
     .slider-nav {

@@ -131,7 +131,7 @@
         $hero_custom = get_post_meta($obj_id, '_gnn_hero_custom_text', true);
         $enable_slider = get_theme_mod('enable_hero_slider', false);
 
-        if (is_front_page() && $enable_slider):
+        if ((is_front_page() || is_home()) && $enable_slider):
             $slider_speed = get_theme_mod('slider_speed', 6000);
             $slider_pause = get_theme_mod('slider_pause_hover', true) ? 'true' : 'false';
             $show_nav = get_theme_mod('slider_show_nav', true);
@@ -182,7 +182,7 @@
                 <?php endif; ?>
             </div>
 
-        <?php elseif (is_front_page() && get_theme_mod('hero_static_image')):
+        <?php elseif ((is_front_page() || is_home()) && get_theme_mod('hero_static_image')):
             // Static Hero Image — shown on front page when slider is disabled and an image is uploaded
             $static_img = get_theme_mod('hero_static_image');
             $overlay_opacity = floatval(get_theme_mod('hero_static_overlay_opacity', 0.4));

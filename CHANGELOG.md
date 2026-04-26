@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.8.2] - 2026-04-26
+### Fixed
+- **Static Hero Image:** Fixed front page detection to use `is_front_page() || is_home()`, ensuring the static hero renders correctly in all WordPress homepage configurations (static page, blog posts, or both).
+- **Unified Hero Height Controls:** Added `hero_height_desktop` and `hero_height_mobile` Customizer controls directly under Hero Section, so users can adjust hero dimensions even when the slider is disabled. The dynamic CSS now reads from these master controls with a fallback to the legacy slider height settings.
+- **Slider Front Page Fix:** Applied the same `is_front_page() || is_home()` fix to the slider rendering condition for consistency.
+
 ## [1.8.1] - 2026-04-26
 ### Added
 - **Update Control Panel:** New admin page under Appearance > Theme Updates showing installed version, latest GitHub version, update status (✓ up to date / ⬆ update available), release date, and changelog.

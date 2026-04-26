@@ -305,6 +305,35 @@ function gnn_antigravity_customize_register($wp_customize)
         'input_attrs' => array('min' => 0, 'max' => 1, 'step' => 0.05),
     ));
 
+    // -- Hero Height (Desktop) — shared between static hero and slider
+    $wp_customize->add_setting('hero_height_desktop', array(
+        'default'           => '100',
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('hero_height_desktop', array(
+        'label'       => esc_html__('Hero Height — Desktop (vh)', 'gnn-antigravity'),
+        'description' => esc_html__('Applies to both the static hero image and the slider.', 'gnn-antigravity'),
+        'section'     => 'gnn_hero_section',
+        'type'        => 'number',
+        'priority'    => 7,
+        'input_attrs' => array('min' => 40, 'max' => 100, 'step' => 5),
+    ));
+
+    // -- Hero Height (Mobile)
+    $wp_customize->add_setting('hero_height_mobile', array(
+        'default'           => '70',
+        'sanitize_callback' => 'absint',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control('hero_height_mobile', array(
+        'label'       => esc_html__('Hero Height — Mobile (vh)', 'gnn-antigravity'),
+        'section'     => 'gnn_hero_section',
+        'type'        => 'number',
+        'priority'    => 8,
+        'input_attrs' => array('min' => 40, 'max' => 100, 'step' => 5),
+    ));
+
     $hero_settings = array(
         'hero_title'    => array('default' => esc_html__('Build the new way.', 'gnn-antigravity'), 'label' => esc_html__('Hero Title', 'gnn-antigravity'), 'type' => 'text'),
         'hero_subtitle' => array('default' => esc_html__('Experimental workspace for agentic development.', 'gnn-antigravity'), 'label' => esc_html__('Hero Subtitle', 'gnn-antigravity'), 'type' => 'textarea'),
@@ -547,8 +576,10 @@ function gnn_customizer_dynamic_css()
     $letter_spacing = floatval(get_theme_mod('gnn_letter_spacing', 0.15));
     $accent_color   = get_theme_mod('accent_color', '#00f2ff');
     $header_height    = absint(get_theme_mod('header_height', 80));
-    $slider_h_desktop = absint(get_theme_mod('slider_height_desktop', 100));
-    $slider_h_mobile  = absint(get_theme_mod('slider_height_mobile', 70));
+
+    // Unified hero height: hero_height is the master, slider_height is legacy fallback.
+    $hero_h_desktop = absint(get_theme_mod('hero_height_desktop', get_theme_mod('slider_height_desktop', 100)));
+    $hero_h_mobile  = absint(get_theme_mod('hero_height_mobile', get_theme_mod('slider_height_mobile', 70)));
 
     $heading_stack = ! empty($heading_font) ? esc_attr($heading_font) : esc_attr($font_family);
 
@@ -571,8 +602,8 @@ function gnn_customizer_dynamic_css()
         esc_attr($letter_spacing),
         esc_attr($accent_color),
         $header_height,
-        $slider_h_desktop,
-        $slider_h_mobile
+        $hero_h_desktop,
+        $hero_h_mobile
     );
 
     wp_add_inline_style('gnn-antigravity-main', $css);

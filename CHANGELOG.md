@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning.
 
+## [1.8.4] - 2026-04-26
+### Improved
+- **Menu System Audit:** Comprehensive overhaul of header and footer navigation for maximum responsiveness and accessibility.
+- **Accessibility:** Hamburger menu converted to native `<button>`, added ARIA controls, and improved focus management.
+- **Robustness:** Added critical inline CSS for top-bar and mobile overlay. Implemented `flex-wrap` and `clamp()` for fluid layouts.
+- **Dropdown Logic:** Unified GSAP dropdown animations with accidental-closure protection and accidental-double-event prevention during AJAX transitions.
+- **Mobile UX:** Enhanced mobile submenu toggling logic with automatic closing of inactive branches and smooth staggered animations.
+
 ## [1.8.3] - 2026-04-26
 ### Fixed
 - **Customizer Preview:** Fixed static hero image, overlay opacity, and hero/slider height not updating in the Customizer live preview. Added missing `postMessage` handlers in `customizer-preview.js` for `hero_height_desktop`, `hero_height_mobile`, `slider_height_desktop`, `slider_height_mobile`, `hero_static_overlay_opacity`, and `hero_static_image`.

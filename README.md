@@ -21,7 +21,7 @@ A highly minimalist, experimental "Canvas" theme mirroring the actual antigravit
 4. Check for updates via **Appearance > Theme Updates**.
 
 ## Version
-**1.8.3**
+**1.8.4**
 
 ## Author
 GNNcreative - [https://gnn.tr](https://gnn.tr)

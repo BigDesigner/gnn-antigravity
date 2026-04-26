@@ -27,6 +27,26 @@
             transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
+        .desktop-only { display: block; }
+        .mobile-only { display: none; }
+        @media (max-width: 768px) {
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block !important; }
+            .site-top-bar { padding: 0 1.5rem; height: var(--header-height, 60px); }
+        }
+
+        #mobile-menu-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #000;
+            z-index: 3000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #mobile-menu-overlay.is-active { display: flex; opacity: 1; }
+
         .hero-title {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 700;
@@ -151,13 +171,12 @@
                 ?>
             </nav>
             <?php if (get_theme_mod('enable_mobile_menu', true)): ?>
-                <div id="hamburger-menu" class="mobile-only" 
-                     role="button" 
-                     tabindex="0" 
+                <button id="hamburger-menu" class="mobile-only" 
                      aria-expanded="false" 
+                     aria-controls="mobile-menu-overlay"
                      aria-label="<?php esc_attr_e('Toggle Menu', 'gnn-antigravity'); ?>">
                     <span></span><span></span>
-                </div>
+                </button>
             <?php endif; ?>
         </div>
     </header>

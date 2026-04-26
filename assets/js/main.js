@@ -323,29 +323,44 @@ document.addEventListener('DOMContentLoaded', () => {
             const subMenu = item.querySelector('.sub-menu');
             if (!subMenu) return;
 
-            item.addEventListener('mouseenter', () => {
+            let leaveTimeout;
+
+            const showSubMenu = () => {
+                clearTimeout(leaveTimeout);
+                gsap.killTweensOf(subMenu);
                 gsap.fromTo(subMenu, 
                     { opacity: 0, y: 10, display: 'none' },
-                    { opacity: 1, y: 0, display: 'block', duration: 0.4, ease: "power3.out" }
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        display: 'block', 
+                        duration: 0.4, 
+                        ease: "power3.out",
+                        onStart: () => { subMenu.style.display = 'block'; }
+                    }
                 );
-            });
+            };
 
-            item.addEventListener('mouseleave', () => {
-                gsap.to(subMenu, { opacity: 0, y: 10, display: 'none', duration: 0.3, ease: "power3.in" });
-            });
+            const hideSubMenu = () => {
+                leaveTimeout = setTimeout(() => {
+                    gsap.to(subMenu, { 
+                        opacity: 0, 
+                        y: 10, 
+                        duration: 0.3, 
+                        ease: "power3.in",
+                        onComplete: () => { subMenu.style.display = 'none'; }
+                    });
+                }, 150); // Small delay to prevent flickering
+            };
+
+            item.addEventListener('mouseenter', showSubMenu);
+            item.addEventListener('mouseleave', hideSubMenu);
 
             // Focus support for accessibility
-            item.addEventListener('focusin', () => {
-                gsap.fromTo(subMenu, 
-                    { opacity: 0, y: 10, display: 'none' },
-                    { opacity: 1, y: 0, display: 'block', duration: 0.4, ease: "power3.out" }
-                );
-            });
-
+            item.addEventListener('focusin', showSubMenu);
             item.addEventListener('focusout', (e) => {
-                // Only hide if focus left the entire menu item (including sub-menu)
                 if (!item.contains(e.relatedTarget)) {
-                    gsap.to(subMenu, { opacity: 0, y: 10, display: 'none', duration: 0.3, ease: "power3.in" });
+                    hideSubMenu();
                 }
             });
         });
@@ -358,67 +373,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!hamburger || !mobileOverlay) return;
 
-        // Prevent multiple attachments
-        if (hamburger.getAttribute('data-gnn-init')) return;
-        hamburger.setAttribute('data-gnn-init', 'true');
+        // Prevent multiple attachments during swup refreshes
+        const newHamburger = hamburger.cloneNode(true);
+        hamburger.parentNode.replaceChild(newHamburger, hamburger);
 
         const closeMenu = () => {
-            hamburger.classList.remove('is-active');
+            newHamburger.classList.remove('is-active');
             mobileOverlay.classList.remove('is-active');
-            hamburger.setAttribute('aria-expanded', 'false');
+            newHamburger.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
+            
+            gsap.to(mobileOverlay, {
+                opacity: 0,
+                duration: 0.3,
+                onComplete: () => {
+                    mobileOverlay.style.display = 'none';
+                }
+            });
         };
 
         const toggleMenu = (e) => {
             if (e) e.preventDefault();
-            const isActive = hamburger.classList.toggle('is-active');
-            mobileOverlay.classList.toggle('is-active', isActive);
-            hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            const isActive = !newHamburger.classList.contains('is-active');
+            
+            newHamburger.classList.toggle('is-active', isActive);
+            newHamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
             document.body.style.overflow = isActive ? 'hidden' : '';
 
             if (isActive) {
+                mobileOverlay.style.display = 'flex';
+                gsap.to(mobileOverlay, {
+                    opacity: 1,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+
                 gsap.from('#mobile-menu-overlay li', {
                     y: 30,
                     opacity: 0,
-                    stagger: 0.1,
-                    duration: 0.6,
-                    ease: "power4.out",
-                    delay: 0.2,
-                    onComplete: () => {
-                        // Focus first link for keyboard users
-                        const firstLink = mobileOverlay.querySelector('a');
-                        if (firstLink) firstLink.focus();
-                    }
+                    stagger: 0.05,
+                    duration: 0.5,
+                    ease: "power3.out",
+                    delay: 0.1
                 });
+            } else {
+                closeMenu();
             }
         };
 
-        hamburger.addEventListener('click', toggleMenu);
-        
-        hamburger.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                toggleMenu(e);
-            }
+        newHamburger.addEventListener('click', toggleMenu);
+
+        // Submenu logic for mobile
+        const mobileLinks = mobileOverlay.querySelectorAll('.menu-item-has-children > a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // If it's a mobile view, toggle submenu
+                if (window.innerWidth <= 768) {
+                    const parentLi = link.parentElement;
+                    const isOpen = parentLi.classList.contains('submenu-open');
+                    
+                    // Close other submenus
+                    mobileOverlay.querySelectorAll('.menu-item-has-children').forEach(li => {
+                        if (li !== parentLi) li.classList.remove('submenu-open');
+                    });
+
+                    if (!isOpen) {
+                        e.preventDefault();
+                        parentLi.classList.add('submenu-open');
+                        
+                        // Animate submenu items
+                        gsap.from(parentLi.querySelectorAll('.sub-menu li'), {
+                            x: -20,
+                            opacity: 0,
+                            stagger: 0.05,
+                            duration: 0.4
+                        });
+                    }
+                }
+            });
         });
 
-        mobileOverlay.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A' || e.target === mobileOverlay) {
+        // Close on escape
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileOverlay.classList.contains('is-active')) {
                 closeMenu();
             }
         });
 
-        const submenuLinks = mobileOverlay.querySelectorAll('li.menu-item-has-children > a');
-        submenuLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (window.innerWidth > 768) return;
-                e.preventDefault();
-                const parentLi = link.parentElement;
-                parentLi.classList.toggle('submenu-open');
-            });
-        });
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileOverlay.classList.contains('is-active')) {
+        // Close on link click (non-submenu links)
+        mobileOverlay.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && !e.target.parentElement.classList.contains('menu-item-has-children')) {
                 closeMenu();
             }
         });

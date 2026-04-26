@@ -102,8 +102,22 @@ a:hover {
     list-style: none !important;
     display: flex !important;
     flex-direction: row !important;
-    gap: 2rem !important;
+    flex-wrap: wrap !important;
+    gap: var(--nav-gap, 2rem) !important;
     align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .site-bottom-bar ul {
+        justify-content: center !important;
+        gap: 1rem !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    :root { --nav-gap: 1.5rem; }
 }
 
 .corner-nav li {
@@ -543,9 +557,8 @@ html.is-animating .transition-fade {
 /* Hamburger Styling */
 #hamburger-menu {
     width: 44px;
-    /* Slightly larger for easier touch */
     height: 44px;
-    padding-top: 20px;
+    padding: 0;
     position: relative;
     cursor: pointer;
     z-index: 4000;
@@ -553,6 +566,8 @@ html.is-animating .transition-fade {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: transparent;
+    border: none;
 }
 
 #hamburger-menu span {
@@ -592,14 +607,17 @@ html.is-animating .transition-fade {
 }
 
 #mobile-menu-overlay a {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 8vw, 3rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
 }
 
 #mobile-menu-overlay a:hover {
     color: var(--accent-color, #00ff00);
+    transform: translateX(10px);
 }
 
 /* Custom Blocks - Brutalist Styles */
@@ -731,10 +749,25 @@ html.is-animating .transition-fade {
     backdrop-filter: blur(6px);
 }
 
-/* Hover / klavye ile aç */
-.corner-nav li:hover>.sub-menu,
-.corner-nav li:focus-within>.sub-menu {
+/* Hover / klavye ile aç (CSS Fallback) */
+.corner-nav li:hover > .sub-menu,
+.corner-nav li:focus-within > .sub-menu {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Submenu Toggle Support */
+.corner-nav li.submenu-open > .sub-menu {
+    display: block !important;
+    opacity: 1 !important;
+    position: static !important;
+    width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 1rem 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* Alt menü linkleri */
